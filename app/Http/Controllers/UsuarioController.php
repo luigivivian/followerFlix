@@ -33,8 +33,14 @@ class UsuarioController extends Controller
 
 
         $dados = $request->all();
-            $dados['senha'] = bcrypt($dados['senha']);
-            Usuario::create($dados);
-            return redirect()->route('home');
+        $dados['senha'] = bcrypt($dados['senha']);
+        Usuario::create($dados);
+        return redirect()->route('home');
+    }
+
+    public function myProfile()
+    {
+        return view('usuarios.edit');
+
     }
 }

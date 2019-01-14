@@ -67,6 +67,12 @@
                     </li>
                     <li>
                         <a href="#" title="Dashboard boxes">
+                            <i class="glyph-icon icon-cogs"></i>
+                            <span>MINHA REDE</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" title="Dashboard boxes">
                             <i class="glyph-icon icon-money"></i>
                             <span>PAGAMENTOS</span>
                         </a>
@@ -80,7 +86,7 @@
 
                     <li class="header"><span>Extra</span></li>
                     <li>
-                        <a href="#" title="Pages">
+                        <a v-bind:href="perfil" title="Pages">
                             <i class="glyph-icon icon-linecons-user"></i>
                             <span>MY PROFILE</span>
                         </a>
@@ -105,6 +111,6 @@
 
 <script>
     export default {
-        props: ['logo', 'sair']
+        props: ['logo', 'sair', 'perfil']
     }
 </script>

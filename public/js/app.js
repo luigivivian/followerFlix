@@ -1950,8 +1950,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['logo', 'sair']
+  props: ['logo', 'sair', 'perfil']
 });
 
 /***/ }),
@@ -36937,7 +36943,56 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
-    _vm._m(2)
+    _c("div", { attrs: { id: "page-sidebar" } }, [
+      _c("div", { staticClass: "scroll-sidebar" }, [
+        _c(
+          "ul",
+          {
+            staticClass: "sf-js-enabled sf-arrows",
+            attrs: { id: "sidebar-menu" }
+          },
+          [
+            _vm._m(2),
+            _vm._v(" "),
+            _vm._m(3),
+            _vm._v(" "),
+            _c("li", { staticClass: "divider" }),
+            _vm._v(" "),
+            _vm._m(4),
+            _vm._v(" "),
+            _vm._m(5),
+            _vm._v(" "),
+            _vm._m(6),
+            _vm._v(" "),
+            _vm._m(7),
+            _vm._v(" "),
+            _vm._m(8),
+            _vm._v(" "),
+            _vm._m(9),
+            _vm._v(" "),
+            _vm._m(10),
+            _vm._v(" "),
+            _vm._m(11),
+            _vm._v(" "),
+            _vm._m(12),
+            _vm._v(" "),
+            _vm._m(13),
+            _vm._v(" "),
+            _c("li", [
+              _c("a", { attrs: { href: _vm.perfil, title: "Pages" } }, [
+                _c("i", { staticClass: "glyph-icon icon-linecons-user" }),
+                _vm._v(" "),
+                _c("span", [_vm._v("MY PROFILE")])
+              ])
+            ]),
+            _vm._v(" "),
+            _vm._m(14),
+            _vm._v(" "),
+            _vm._m(15)
+          ]
+        )
+      ])
+    ])
   ])
 }
 var staticRenderFns = [
@@ -36981,150 +37036,170 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { attrs: { id: "page-sidebar" } }, [
-      _c("div", { staticClass: "scroll-sidebar" }, [
-        _c(
-          "ul",
-          {
-            staticClass: "sf-js-enabled sf-arrows",
-            attrs: { id: "sidebar-menu" }
-          },
-          [
-            _c("li", { staticClass: "header" }, [
-              _c("span", [_vm._v("ADMINISTRATIVO")])
-            ]),
-            _vm._v(" "),
-            _c("li", [
-              _c(
-                "a",
-                { attrs: { href: "index.html", title: "Admin Dashboard" } },
-                [
-                  _c("i", { staticClass: "glyph-icon icon-linecons-tv" }),
-                  _vm._v(" "),
-                  _c("span", [_vm._v("ADMIN DASHBOARD")])
-                ]
-              )
-            ]),
-            _vm._v(" "),
-            _c("li", { staticClass: "divider" }),
-            _vm._v(" "),
-            _c("li", { staticClass: "no-menu" }, [
-              _c(
-                "a",
-                {
-                  attrs: {
-                    href: "../frontend-template/index.html",
-                    title: "Frontend template"
-                  }
-                },
-                [
-                  _c("i", { staticClass: "glyph-icon icon-linecons-beaker" }),
-                  _vm._v(" "),
-                  _c("span", [_vm._v("REDFLAGS")]),
-                  _vm._v(" "),
-                  _c("span", { staticClass: "bs-label label-danger" }, [
-                    _vm._v("\n            NEW\n        ")
-                  ])
-                ]
-              )
-            ]),
-            _vm._v(" "),
-            _c("li", { staticClass: "header" }, [
-              _c("span", [_vm._v("PESSOAL")])
-            ]),
-            _vm._v(" "),
-            _c("li", [
-              _c(
-                "a",
-                { attrs: { href: "index.html", title: "Admin Dashboard" } },
-                [
-                  _c("i", { staticClass: "glyph-icon icon-home" }),
-                  _vm._v(" "),
-                  _c("span", [_vm._v("INICIO")])
-                ]
-              )
-            ]),
-            _vm._v(" "),
-            _c("li", [
-              _c("a", { attrs: { href: "#", title: "Dashboard boxes" } }, [
-                _c("i", { staticClass: "glyph-icon icon-user" }),
-                _vm._v(" "),
-                _c("span", [_vm._v("GET PROFISSIONAL")])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("li", [
-              _c("a", { attrs: { href: "#", title: "Dashboard boxes" } }, [
-                _c("i", { staticClass: "glyph-icon icon-user" }),
-                _vm._v(" "),
-                _c("span", [_vm._v("PROFISSIONAL FILTER")])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("li", [
-              _c("a", { attrs: { href: "#", title: "Dashboard boxes" } }, [
-                _c("i", { staticClass: "glyph-icon icon-star" }),
-                _vm._v(" "),
-                _c("span", [_vm._v("MY TASKS")])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("li", [
-              _c("a", { attrs: { href: "#", title: "Dashboard boxes" } }, [
-                _c("i", { staticClass: "glyph-icon icon-money" }),
-                _vm._v(" "),
-                _c("span", [_vm._v("PAGAMENTOS")])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("li", [
-              _c(
-                "a",
-                {
-                  attrs: {
-                    href: "#",
-                    title: "Tutoriais para o uso da plataforma"
-                  }
-                },
-                [
-                  _c("i", {
-                    staticClass: "glyph-icon icon-linecons-lightbulb"
-                  }),
-                  _vm._v(" "),
-                  _c("span", [_vm._v("TUTORIALS")])
-                ]
-              )
-            ]),
-            _vm._v(" "),
-            _c("li", { staticClass: "header" }, [
-              _c("span", [_vm._v("Extra")])
-            ]),
-            _vm._v(" "),
-            _c("li", [
-              _c("a", { attrs: { href: "#", title: "Pages" } }, [
-                _c("i", { staticClass: "glyph-icon icon-linecons-user" }),
-                _vm._v(" "),
-                _c("span", [_vm._v("MY PROFILE")])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("li", [
-              _c("a", { attrs: { href: "#", title: "Pages" } }, [
-                _c("i", { staticClass: "glyph-icon icon-bullhorn" }),
-                _vm._v(" "),
-                _c("span", [_vm._v("SUPORTE")])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("li", [
-              _c("a", { attrs: { href: "#", title: "Pages" } }, [
-                _c("i", { staticClass: "glyph-icon icon-calculator" }),
-                _vm._v(" "),
-                _c("span", [_vm._v("CALCULATOR")])
-              ])
-            ])
-          ]
-        )
+    return _c("li", { staticClass: "header" }, [
+      _c("span", [_vm._v("ADMINISTRATIVO")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "index.html", title: "Admin Dashboard" } }, [
+        _c("i", { staticClass: "glyph-icon icon-linecons-tv" }),
+        _vm._v(" "),
+        _c("span", [_vm._v("ADMIN DASHBOARD")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "no-menu" }, [
+      _c(
+        "a",
+        {
+          attrs: {
+            href: "../frontend-template/index.html",
+            title: "Frontend template"
+          }
+        },
+        [
+          _c("i", { staticClass: "glyph-icon icon-linecons-beaker" }),
+          _vm._v(" "),
+          _c("span", [_vm._v("REDFLAGS")]),
+          _vm._v(" "),
+          _c("span", { staticClass: "bs-label label-danger" }, [
+            _vm._v("\n            NEW\n        ")
+          ])
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "header" }, [
+      _c("span", [_vm._v("PESSOAL")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "index.html", title: "Admin Dashboard" } }, [
+        _c("i", { staticClass: "glyph-icon icon-home" }),
+        _vm._v(" "),
+        _c("span", [_vm._v("INICIO")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "#", title: "Dashboard boxes" } }, [
+        _c("i", { staticClass: "glyph-icon icon-user" }),
+        _vm._v(" "),
+        _c("span", [_vm._v("GET PROFISSIONAL")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "#", title: "Dashboard boxes" } }, [
+        _c("i", { staticClass: "glyph-icon icon-user" }),
+        _vm._v(" "),
+        _c("span", [_vm._v("PROFISSIONAL FILTER")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "#", title: "Dashboard boxes" } }, [
+        _c("i", { staticClass: "glyph-icon icon-star" }),
+        _vm._v(" "),
+        _c("span", [_vm._v("MY TASKS")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "#", title: "Dashboard boxes" } }, [
+        _c("i", { staticClass: "glyph-icon icon-cogs" }),
+        _vm._v(" "),
+        _c("span", [_vm._v("MINHA REDE")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "#", title: "Dashboard boxes" } }, [
+        _c("i", { staticClass: "glyph-icon icon-money" }),
+        _vm._v(" "),
+        _c("span", [_vm._v("PAGAMENTOS")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c(
+        "a",
+        { attrs: { href: "#", title: "Tutoriais para o uso da plataforma" } },
+        [
+          _c("i", { staticClass: "glyph-icon icon-linecons-lightbulb" }),
+          _vm._v(" "),
+          _c("span", [_vm._v("TUTORIALS")])
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "header" }, [_c("span", [_vm._v("Extra")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "#", title: "Pages" } }, [
+        _c("i", { staticClass: "glyph-icon icon-bullhorn" }),
+        _vm._v(" "),
+        _c("span", [_vm._v("SUPORTE")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "#", title: "Pages" } }, [
+        _c("i", { staticClass: "glyph-icon icon-calculator" }),
+        _vm._v(" "),
+        _c("span", [_vm._v("CALCULATOR")])
       ])
     ])
   }
