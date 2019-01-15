@@ -17,16 +17,21 @@
 <div class="container">
     <div class="center-align"><h3>Cadastre-se</h3></div>
         @if($errors->all())
-          <div class="container alert alert-danger">
-            <ul>
+          <div class="center-align">
+            <ul class="vermelho-txt">
               @foreach($errors->all() as $error)
                 <li>{{$error}}</li>
               @endforeach
             </ul>
           </div>
         @endif
+    @if($error)
+        <div class="center-align">
+          <p class="vermelho-txt"> {{ $error }}</p>
+        </div>
+    @endif
 
-        <form class="form-horizontal" method="post" action="{{route ('salvar')}}">
+        <form class="" method="post" action="{{route ('salvar')}}">
           {{ csrf_field() }}
 
             <div class="row">
@@ -42,7 +47,7 @@
 
             <div class="row">
                 <div class="input-field col s6 l6">
-                    <input placeholder="Digite seu Email" name="email" id="email" type="text" class="validate" required>
+                    <input placeholder="Digite seu Email" name="email" id="email" type="email" class="validate" required>
                     <label for="email">Email</label>
                 </div>
                 <div class="input-field col s6 l6">
@@ -59,7 +64,7 @@
                    <div class="col s6 l6">
                        <p>
                            <label>
-                               <input name="group1" type="radio" checked />
+                               <input name="genero" value="masculino" type="radio" checked />
                                <span>Masculino</span>
                            </label>
                        </p>
@@ -67,32 +72,37 @@
                    <div class="col s6 l6">
                        <p>
                            <label>
-                               <input name="group1" type="radio"  />
+                               <input name="genero" value="feminino" type="radio"  />
                                <span>Feminino</span>
                            </label>
                        </p>
                    </div>
                </div>
+            </div>
 
+
+            <div class="row">
+                <div class="input-field col s12 l12">
+                    <input placeholder="Digite seu login" name="login" id="login" type="text" class="validate" required>
+                    <label for="login">Login</label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s6 l6">
+                    <input placeholder="Digite sua senha" name="senha" id="senha" type="password" class="validate" required>
+                    <label for="senha">Senha</label>
+                </div>
+                <div class="input-field col s6 l6">
+                    <input placeholder="Confirme a senha" name="senhaConfirma" id="senhaConfirma" type="password" class="validate" required>
+                    <label for="senhaConfirma">Confirmar Senha</label>
+                </div>
             </div>
 
           <div class="input-field">
             <div class="col s12 l4">
-              <label for="login">Login</label>
-              <input type="text" class="input-field" name="login" placeholder="Digite seu login">
-            </div>
-          </div>
-
-          <div class="input-field">
-            <div class="col s12 l4">
-              <label for="senha">Senha</label>
-              <input type="password" class="form-control" name="senha" placeholder="Digite sua senha">
-            </div>
-          </div>
-          <div class="input-field">
-            <div class="col s12 l4">
-              <a href="{{route('login')}}" type="reset" class="btn">Cancelar</a>
-              <button type="submit" class="btn">Registrar</button>
+              <button type="button" onclick="window.location='{{ route("login") }}'" class="btn red">Cancelar</button>
+              <button type="submit" class="waves-effect waves-light btn">Registrar</button>
             </div>
           </div>
         </form>

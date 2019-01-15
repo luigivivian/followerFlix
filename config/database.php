@@ -43,7 +43,7 @@ return [
         'mysql' => [
             'driver'    => 'mysql',
             'host'      => 'localhost',
-            'database'  => 'teleEntregas',
+            'database'  => 'followflix',
             'username'  => 'root',
             'password'  => 'admin',
             'charset'   => 'utf8',

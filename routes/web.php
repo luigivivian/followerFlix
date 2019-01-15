@@ -23,4 +23,10 @@ Route::post('/salvar', 'UsuarioController@salvar')->name('salvar');
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', 'AutenticacaoController@privada')->name('dashboard');
     Route::get('/myprofile', 'UsuarioController@myProfile')->name('myProfile');
+
+    Route::group(['prefix'=>'user', 'where'=>['id'=>'[0-9]+']], function() {
+        Route::get('{id}/edit',     ['as'=>'user.edit',      'uses'=> 'UsuarioController@myProfile'] );
+        Route::put('{id}/update',   ['as'=>'user.update',    'uses'=> 'UsuarioController@update'] );
+
+    });
 });

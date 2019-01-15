@@ -31,6 +31,7 @@ class AutenticacaoController extends Controller
         $usuario = Usuario::where('login', $login)->first();
         if(Auth::check() || ($usuario && Hash::check($senha, $usuario->senha))){
             Auth::login($usuario);
+            session(['user' => $usuario]);
             return redirect(route('dashboard'));
         } else {
             $dados['error'] = "Usuario ou senha incorretos";
@@ -41,6 +42,7 @@ class AutenticacaoController extends Controller
     public function logout()
     {
         Auth::logout();
+        session()->flush();
         return redirect(route('home'));
     }
 }

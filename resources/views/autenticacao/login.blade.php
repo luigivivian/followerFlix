@@ -12,55 +12,66 @@
 
     <title>Autenticação</title>
 </head>
+<style>
+    .row .col{
+        float: none !important;
+        margin-left: auto;
+        margin-right: auto;
+    }
+</style>
 <body>
 
 <div class="container">
-    <div class="panel-heading text-center mrg20T"><h3>Entrar no sistema</h3></div>
+    <div class="center-align"><h3>Entrar no sistema</h3></div>
 
-    <div class="center-vertical">
-        <div class="center-content">
-                <div class="panel-body">
+                <div class="painelLogin">
                     <div>
                         @if(isset($error))
-                            <div class="mrg20T center-margin col-sm-4 text-center">
-                                <div class="example-box-wrapper">
-                                    <div class="content-box border-top border-red">
+                            <div class="center-align">
+                                    <div class="vermelho-txt">
                                         <p class="clearfix">
                                             {{$error}}
                                         </p>
                                     </div>
-                                </div>
                             </div>
                         @endif
                     </div>
+                    @if(isset($msg))
+                        <div class="center-align">
+                            <div class="verde-txt">
+                                <p class="clearfix">
+                                    {{$msg}}
+                                </p>
+                            </div>
+                        </div>
+                    @endif
 
-                    <form class="form-horizontal center-margin col-md-4" method="post" action="{{ route('logar') }}">
-                        {{ csrf_field() }}
-                        <div class="form-group">
-                            <label for="login" class="col-sm-1 control-label">Login</label>
-                            <div class="col-md-12">
-                                <input type="text" class="form-control" name="login"
-                                       placeholder="Digite seu login">
+
+                        <form class="row col s12 l4" method="post" action="{{ route('logar') }}">
+                            {{ csrf_field() }}
+                            <div class="row">
+                                <div class="input-field col s12 l4">
+                                    <label for="login">Login</label>
+                                    <input type="text" class="validate" name="login"
+                                           placeholder="Digite seu login">
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="senha" class="col-sm-1 control-label">Senha</label>
-                            <div class="col-md-12">
-                                <input type="password" class="form-control" name="senha"
-                                       placeholder="Digite seu senha">
+
+                           <div class="row">
+                               <div class="input-field col s12 l4">
+                                   <label for="senha" class="col-sm-1 control-label">Senha</label>
+                                   <input type="password" class="form-control" name="senha"
+                                          placeholder="Digite seu senha">
+                               </div>
+                           </div>
+                            <div class="col s12 l4">
+                                    <button type="reset" class="btn red">Cancelar</button>
+                                    <button type="submit" class="btn">Entrar</button>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-md-12">
-                                <button type="reset" class="btn btn-default">Cancelar</button>
-                                <button type="submit" class="btn btn-primary">Entrar</button>
-                            </div>
-                        </div>
-                    </form>
+                        </form>
                 </div>
-            </div>
-        </div>
-    </div>
+
+</div>
 
 
 <script src="{{ asset('js/bootstrap/Jquery.js') }}"></script>
