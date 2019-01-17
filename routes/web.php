@@ -16,16 +16,17 @@ Route::get('/login', 'AutenticacaoController@login')->name('login');
 Route::post('/logar', 'AutenticacaoController@logar')->name('logar');
 Route::get('/logout', 'AutenticacaoController@logout')->name('logout');
 
-Route::get('/registrar', 'UsuarioController@registrar')->name('registrar');
-Route::post('/salvar', 'UsuarioController@salvar')->name('salvar');
+Route::get('/registrar/{token}', 'UsuarioController@registrar')->name('registrar');
 Route::post('/salvar', 'UsuarioController@salvar')->name('salvar');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', 'AutenticacaoController@privada')->name('dashboard');
-    Route::get('/myprofile', 'UsuarioController@myProfile')->name('myProfile');
+    Route::get('/myprofile', 'UsuarioController@myProfile')->name('myprofile');
+    Route::get('/getprofissional', 'UsuarioController@profissionalFilter')->name('getprofissional');
 
     Route::group(['prefix'=>'user', 'where'=>['id'=>'[0-9]+']], function() {
         Route::get('{id}/edit',     ['as'=>'user.edit',      'uses'=> 'UsuarioController@myProfile'] );
+        Route::get('/buscar',     ['as'=>'user.buscar',      'uses'=> 'UsuarioController@buscarUsuario'] );
         Route::put('{id}/update',   ['as'=>'user.update',    'uses'=> 'UsuarioController@update'] );
 
     });

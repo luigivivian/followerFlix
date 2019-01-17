@@ -1,10 +1,10 @@
 /*navbar*/
-header, main, footer {
+#conteudo {
     padding-left: 300px;
 }
 
 @media only screen and (max-width : 992px) {
-    header, main, footer {
+    #conteudo {
         padding-left: 0;
     }
 }
@@ -33,6 +33,7 @@ header, main, footer {
 .dropdown-trigger:hover{
     background-color: transparent !important;
 }
+
 /*Navar fim*/
 
 /*page perfil usuario*/
@@ -44,41 +45,14 @@ header, main, footer {
 
 }
 
-@media all and (max-width: 768px) and (min-height: 320px){
-    #conteudo{
-        margin-left: 0% !important;
-    }
+.cardBotoes{
+    border-bottom-style: solid;
+    border-bottom-color: #ff5252;
+    border-bottom-width: 4px;
+    -webkit-box-shadow: 0px -13px 71px 1px rgba(244,70,70,1);
+    -moz-box-shadow: 0px -13px 71px 1px rgba(244,70,70,1);
+    box-shadow: 0px -13px 71px 1px rgba(244,70,70,1);
 }
-
-@media all and (min-width: 990px){
-    #conteudo{
-        margin-left: 30% !important;
-    }
-}
-
-@media all and (min-width: 1350px){
-    #conteudo{
-        margin-left: 20% !important;
-    }
-}
-@media all and (min-width: 1305px){
-    #conteudo{
-        margin-left: 22% !important;
-    }
-}
-@media all and (min-width: 1310px){
-    #conteudo{
-        margin-left: 25% !important;
-    }
-}
-@media all and (min-width: 1401px){
-    #conteudo{
-        margin-left: 20% !important;
-    }
-}
-
-
-
 /*Cores*/
 
 .vermelho{
@@ -150,4 +124,71 @@ header, main, footer {
 }
 body{
     font-family: "Bariol" !important;
+}
+
+
+/*Avatar e card*/
+.avatar {
+    object-fit: cover;
+    border-radius:50%;
+    width: 90px;
+    height: 75px;
+    z-index: 15;
+    
+}
+
+.status{
+    padding: 1px 9px 2px;
+    font-size: 12.025px;
+    font-weight: bold;
+    white-space: nowrap;
+    color: #ffffff;
+    background-color: #999999;
+    -webkit-border-radius: 9px;
+    -moz-border-radius: 9px;
+    border-radius: 9px;
+}
+
+.card-content{
+    position: relative;
+}
+.card{
+    margin-top: 5%;
+}
+@media only screen and (max-width : 992px) {
+    .card{
+        margin-top: 20%;
+    }
+}
+.avatar{
+    position: absolute;
+    z-index: 1;
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    -o-transform: translateX(-50%);
+    transform: translateX(-50%);
+    left: 50%;
+    top: -30%;
+}
+.status-ativo {
+    background-color: #36d484;
+
+}
+.status-pendente {
+    background-color: #ffbd20;
+}
+.status-inativo {
+    background-color: #f0253d;
+}
+
+.input-group{
+    margin-left: 1%;
+    display:table;
+}
+
+.input-group .input-field,
+.input-group .input-group-addon{
+    display:table-cell;
+
 }

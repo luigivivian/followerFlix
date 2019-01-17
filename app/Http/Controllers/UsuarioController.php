@@ -62,4 +62,16 @@ class UsuarioController extends Controller
         return view('usuarios.edit', $dados);
 
     }
+
+    public function profissionalFilter(){
+        return view('usuarios.buscar');
+    }
+    public function buscarUsuario(Request $request){
+        $filtro = $request->all()['procurar'];
+        //Implementar buscar no banco
+        //get more filters
+        $u = new Usuario();
+        $get['teste'] = $u->getPais();
+        return view('usuarios.buscar', $get);
+    }
 }

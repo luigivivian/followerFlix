@@ -25,7 +25,7 @@
             </ul>
           </div>
         @endif
-    @if($error)
+    @if(isset($error))
         <div class="center-align">
           <p class="vermelho-txt"> {{ $error }}</p>
         </div>

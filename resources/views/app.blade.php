@@ -49,13 +49,13 @@
 
         <ul id="slide-out" class="sidenav sidenav-fixed">
             <div> <img style="width: 80%; height: 80%;" src="{{asset('imgs/logo.png')}}"> </div>
-            <li><a href="#!">HOME</a></li>
+            <li><a href="{{route('dashboard')}}">HOME</a></li>
             <li><a href="#!">TUTORIALS</a></li>
-            <li><a href="#!">GET MORE PROFESSIONALS</a></li>
+            <li><a href="{{route('getprofissional')}}">GET MORE PROFESSIONALS</a></li>
             <li><a href="#!">CLIENTE / TAREFA</a></li>
             <li><a href="#!">YOUR DOWNLINE</a></li>
             <li><a href="#!">RED FLAG</a></li>
-            <li><a href="#!">YOUR ACCOUNT</a></li>
+            <li><a href="{{route('myprofile')}}">YOUR ACCOUNT</a></li>
             <li><a href="#!">SUPPORT</a></li>
             <li><a href="#!">CALCULATOR</a></li>
             <li><a href="#!">YOUR PAYMENTS</a></li>

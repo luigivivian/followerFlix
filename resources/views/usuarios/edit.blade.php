@@ -44,7 +44,7 @@
                                <label for="sobrenome">Sobrenome</label>
                            </div>
                            <div class="input-field col s12">
-                                   <input placeholder="Nome" name="nome" value="{{ $user->email }}" id="nome" type="text" class="validate" required>
+                                   <input placeholder="Nome" name="email" value="{{ $user->email }}" id="email" type="text" class="validate" required>
                                 <label for="sobrenome">Email</label>
                            </div>
 
