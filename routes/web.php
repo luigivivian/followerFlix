@@ -23,6 +23,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
     Route::get('/myprofile', 'UsuarioController@myProfile')->name('myprofile');
     Route::get('/getprofissional', 'UsuarioController@profissionalFilter')->name('getprofissional');
+    Route::get('/ativarconta', 'UsuarioController@ativarConta')->name('ativarconta');
+    Route::post('/comprarativacao/{id}', 'AtivacaoController@comprarAtivacao')->name('comprarativacao');
+    Route::get('/confirmarativacao', 'AtivacaoController@confirmarAtivacao')->name('confirmarativacao');
+
 
     Route::group(['prefix'=>'user', 'where'=>['id'=>'[0-9]+']], function() {
         Route::get('{id}/edit',     ['as'=>'user.edit',      'uses'=> 'UsuarioController@myProfile'] );
@@ -30,4 +34,5 @@ Route::middleware(['auth'])->group(function () {
         Route::put('{id}/update',   ['as'=>'user.update',    'uses'=> 'UsuarioController@update'] );
 
     });
+
 });

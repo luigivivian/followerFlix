@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Ativacao;
 use App\Usuario;
 use Illuminate\Http\Request;
 use Exception;
@@ -125,4 +126,19 @@ class UsuarioController extends Controller
         $dados['teste'] = $u->getPais($email);
         return view('usuarios.buscar', $dados);
     }
+
+    public function ativarConta(){
+        $dados['usuario'] = session()->get('user');
+        return view('usuarios.ativar');
+    }
+
+
+
+    public function desativarUsuario($u){
+        $u = new Usuario();
+        $query = $u->desativarUsuario($u);
+        return $query;
+    }
+
+
 }

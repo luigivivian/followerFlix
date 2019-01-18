@@ -5,7 +5,7 @@
 
         <div class="card cardDados">
             <div class="card-content darkgrey-text">
-                {!! Form::open(['route' => ["user.update", $user->id], 'method'=>'put', 'novalidate']) !!}
+                {!! Form::open(['route' => ["user.update", $user->id], 'method'=>'put']) !!}
                 {{  csrf_field() }}
                    <div class="row">
                        <div class="col s4 l4 center-align">
@@ -21,17 +21,19 @@
                                <label for="nome">Name</label>
                            </div>
                            <div class="input-field col s12">
-                               @if($user->dataFimAtivacao == null)
-                                   <?php $user->dataFimAtivacao = "NÃO ATIVO"; ?>
+                               @if(session()->get('ativacao') == false)
+                                   <?php $ativacao = "NÃO ATIVO"; ?>
+                               @elseif(session()->get('ativacao')->dataValidade)
+                                   <?php $ativacao = "ATIVO ATÉ : ". date('d-m-Y', strtotime(session()->get('ativacao')->dataValidade)); ?>
                                @endif
-                               <input placeholder="Fim ativação" style="color: red;" readonly value="{{$user->dataFimAtivacao}}" name="dataExpiracao" id="dataExpiracao" type="text" class="validate" required>
+                               <input placeholder="Fim ativação" style="color: red;" readonly value="{{$ativacao}}" name="dataExpiracao" id="dataExpiracao" type="text" class="validate" required>
                                <label for="dataExpiracao">Data fim ativação</label>
                            </div>
                            <div class="input-field col s12">
                                <select required name="metodoPagamento">
                                    <option value="" disabled selected>Payment</option>
-                                   <option value="PAGSEGURO" <?= $user->metodoPagamento == "PAGSEGURO" ? "selected" : ''; ?>>PagSeguro</option>
-                                   <option value="PAYPAL" <?= $user->metodoPagamento == "PAYPAL" ? "selected" : ''; ?>>PayPal</option>
+                                   <option value="pagseguro" <?= $user->metodoPagamento == "pagseguro" ? "selected" : ''; ?>>PagSeguro</option>
+                                   <option value="paypal" <?= $user->metodoPagamento == "paypal" ? "selected" : ''; ?>>PayPal</option>
                                </select>
                                <label>Payment method</label>
                            </div>
@@ -39,10 +41,7 @@
                        </div>
 
                        <div class="col s4 l4">
-                           <div class="input-field col s12">
-                               <input placeholder="Sobrenome" value="{{ $user->sobrenome }}" name="sobrenome" id="sobrenome" type="text" class="validate" required>
-                               <label for="sobrenome">Sobrenome</label>
-                           </div>
+
                            <div class="input-field col s12">
                                    <input placeholder="Nome" name="email" value="{{ $user->email }}" id="email" type="text" class="validate" required>
                                 <label for="sobrenome">Email</label>

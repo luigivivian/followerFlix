@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Enums\Enuns;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -24,6 +25,24 @@ class Usuario extends Authenticatable
     public function getPais($e){
         $data = DB::select('call getPais(?)',array($e));
         return $data;
+    }
+
+    public function desativarUsuario($u){
+        $query = DB::table('usuarios')->where('id', $u->id)->update(array('status' => Enuns::usuario_inativo));
+        if($query == 1){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public function ativarUsuario($u){
+        $query = DB::table('usuarios')->where('id', $u->id)->update(array('status' => Enuns::usuario_ativo));
+        if($query == 1){
+            return true;
+        }else{
+            return false;
+        }
     }
 
 

@@ -4,10 +4,26 @@
 @section('content')
 <div id="conteudo">
     <div class="row">
-       <div class="center-align vermelho-txt">
-           <h4>Seus contratos</h4>
-       </div>
-        <?= var_dump($contratos)?>
+
+        <div>
+            @if(session()->get('usuarioAtivo') == false)
+                <div class="col s12 m6 l12 cardBotoes card">
+                    <div class="card-content center-align">
+
+                        <div class="center-align">
+                            <h5 class="vermelho2-txt">VOCÊ ESTÁ INATIVO</h5>
+                            <h5 class="">Você precisa ativar sua conta para contratar e ser contratado</h5>
+                            <a class="btn verde" href="{{route('ativarconta')}}">ATIVAR CONTA</a>
+                        </div>
+                    </div>
+                </div>
+            @endif
+        </div>
+
+        @if(session()->get('usuarioAtivo') == true)
+            <div class="center-align vermelho-txt">
+                <h4>Seus contratos</h4>
+            </div>
         <div class="row col s12 m12 l12"> <!--1st row containing 2 cards-->
             <?php $count = 1;?>
             @foreach($contratos as $u)
@@ -58,6 +74,7 @@
                <a onclick="showContratos(1);" style="cursor: pointer;">Show All</a>
            </div>
         </div>
+
     </div>
 
     <div class="row center-align">
@@ -72,6 +89,7 @@
     <div class="cardBotoes center-align">
 
     </div>
+    @endif
 
 </div>
 

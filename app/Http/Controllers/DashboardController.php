@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Servico;
 use Illuminate\Http\Request;
 use App\Usuario;
+use App\Enums\Enuns;
 class DashboardController extends Controller
 {
     //

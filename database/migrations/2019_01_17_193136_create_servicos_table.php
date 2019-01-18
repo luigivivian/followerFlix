@@ -15,7 +15,7 @@ class CreateServicosTable extends Migration
     {
         Schema::create('servicos', function (Blueprint $table) {
             $table->increments('id');
-            $table->date('dataContrato')->default(date("Y-m-d H:i:s"));
+            $table->date('dataContrato')->default(date("Y-m-d"));
             $table->string('descricao')->default('Contrato Obrigatorio');
             $table->string('tipoServico')->default('basico'); //basico, pro ou super
             $table->boolean('contrato')->nullable();

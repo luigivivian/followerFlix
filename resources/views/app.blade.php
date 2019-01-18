@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- HELPERS -->
     <link rel="stylesheet" type="text/css" href="{{ asset('css/stylera.css') }}">
-    <title>Autenticação</title>
+    <title>Builder All</title>
 </head>
 <style>
     @font-face {
@@ -92,6 +92,7 @@
             }
         );
     });
+
 </script>
 </body>
 
