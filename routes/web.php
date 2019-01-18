@@ -20,7 +20,7 @@ Route::get('/registrar/{token}', 'UsuarioController@registrar')->name('registrar
 Route::post('/salvar', 'UsuarioController@salvar')->name('salvar');
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard', 'AutenticacaoController@privada')->name('dashboard');
+    Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
     Route::get('/myprofile', 'UsuarioController@myProfile')->name('myprofile');
     Route::get('/getprofissional', 'UsuarioController@profissionalFilter')->name('getprofissional');
 

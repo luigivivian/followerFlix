@@ -44,6 +44,9 @@
     border-bottom-width: 4px;
 
 }
+.cardInvisivel{
+    display: none !important;
+}
 
 .cardBotoes{
     border-bottom-style: solid;

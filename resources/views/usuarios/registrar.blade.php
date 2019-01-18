@@ -31,9 +31,14 @@
         </div>
     @endif
 
+
         <form class="" method="post" action="{{route ('salvar')}}">
           {{ csrf_field() }}
+            @if(isset($token) && isset($id_usuario_pai))
 
+                <input name="id_usuario_pai" type="number" hidden value="{{$id_usuario_pai}}">
+                <input name="tokenConvite" type="text" hidden value="{{$token->token}}">
+            @endif
             <div class="row">
                 <div class="input-field col s6">
                     <input placeholder="Digite seu Nome" name="nome" id="nome" type="text" class="validate" required>

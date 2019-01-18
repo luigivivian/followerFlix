@@ -20,18 +20,18 @@ class CreateUsuariosTable extends Migration
             $table->string('email');
             $table->string('senha');
             $table->boolean('status')->default(false);
-            $table->date('dataCadastro')->useCurrent();
+            $table->date('dataCadastro')->default(date("Y-m-d H:i:s"));
             $table->string('genero');
             $table->string('sobrenome');
+            $table->date('dataAtivacao')->nullable();
             $table->date('dataNascimento');
-            $table->date('dataAtivacao');
-            $table->date('dataFimAtivacao');
-            $table->integer('id_usuario_pai');
-            $table->integer('idade');
+            $table->date('dataFimAtivacao')->nullable();
+            $table->integer('id_usuario_pai')->nullable();
 
             $table->rememberToken();
             $table->timestamps();
         });
+
     }
 
     /**
@@ -41,6 +41,6 @@ class CreateUsuariosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('usuarios');
+        //
     }
 }

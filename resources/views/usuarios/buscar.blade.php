@@ -9,10 +9,11 @@
             </div>
 
         <div id="acessoPadrao">
+            @if(isset($teste))
             @foreach($teste as $u)
                 <p>{{$u->nome}}</p>
                 @endforeach
-
+            @endif
         </div>
 
         <div id="acessoPro">

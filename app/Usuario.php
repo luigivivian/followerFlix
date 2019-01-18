@@ -14,21 +14,17 @@ class Usuario extends Authenticatable
 
     protected $fillable = [
         'nome', 'login', 'email', 'senha', 'sobrenome', 'dataNascimento',
-        'genero', 'senhaConfirmar','descricao', 'metodoPagamento'
+        'genero', 'senhaConfirmar','descricao', 'metodoPagamento', 'tokenConvite', 'id_usuario_pai', 'token'
     ];
 
     protected $hidden = [
         'senha'
     ];
 
-
-
-    public function getPais(){
-        $e = 'luigivivian@gmail.com';
+    public function getPais($e){
         $data = DB::select('call getPais(?)',array($e));
         return $data;
     }
-
 
 
 }

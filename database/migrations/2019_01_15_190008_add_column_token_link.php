@@ -13,16 +13,10 @@ class AddColumnTokenLink extends Migration
      */
     public function up()
     {
-        Schema::create('token', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('token')->nullable();
-            $table->integer('id_usuario')->unsigned();
-            $table->foreign('id_usuario')->references('id')->on('usuarios');
-            $table->rememberToken();
-            $table->timestamps();
+        Schema::table('usuarios', function (Blueprint $table) {
+            $table->string('token')->nullable()->unique();
         });
     }
-
     /**
      * Reverse the migrations.
      *
@@ -30,6 +24,6 @@ class AddColumnTokenLink extends Migration
      */
     public function down()
     {
-        //
+
     }
 }

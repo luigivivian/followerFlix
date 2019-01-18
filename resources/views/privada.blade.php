@@ -7,61 +7,55 @@
        <div class="center-align vermelho-txt">
            <h4>Seus contratos</h4>
        </div>
+        <?= var_dump($contratos)?>
         <div class="row col s12 m12 l12"> <!--1st row containing 2 cards-->
-            <div class="col s12 m6 l3 card">
-                <div class="card-content center-align">
-                    <div>
-                        <img class="avatar" src="{{asset('imgs/avatar.png')}}">
-                    </div>
+            <?php $count = 1;?>
+            @foreach($contratos as $u)
+                <?php
+                    switch (strtoupper($u->status)) {
+                        case 'PENDENTE':
+                            $corStatus = 'status-pendente';
+                            break;
+                        case 'ATIVO':
+                            $corStatus = 'status-ativo';
+                            break;
+                        case 'INATIVO':
+                            $corStatus = 'status-inativo';
+                            break;
+                    }
 
-                    <div class="center-align">
-                        <h5 class="">Pedro Jamelao</h5>
-                        <p>pedrojamelao@gmail.com</p>
-                        <p class="status status-ativo">PAID</p>
+                ?>
+                @if($count <= 4)
+                    <div class="col s12 m6 l3 card">
+                        <div class="card-content center-align">
+                            <div>
+                                <img class="avatar" src="{{asset('imgs/avatar.png')}}">
+                            </div>
+                            <div class="center-align">
+                                <h5 class="">{{$u->nome}}</h5>
+                                <p>{{$u->email}}</p>
+                                <p class="status <?=$corStatus;?>">{{strtoupper($u->status)}}</p>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="col s12 m6 l3 card">
-                <div class="card-content center-align">
-                    <div>
-                        <img class="avatar" src="{{asset('imgs/avatar.png')}}">
-                    </div>
-
-                    <div class="center-align">
-                        <h5 class="">Pedro Jamelao</h5>
-                        <p>pedrojamelao@gmail.com</p>
-                        <p class="status status-inativo">NOT PAID</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col s12 m6 l3 card">
-                <div class="card-content center-align">
-                    <div>
-                        <img class="avatar" src="{{asset('imgs/avatar.png')}}">
-                    </div>
-
-                    <div class="center-align">
-                        <h5 class="">Pedro Jamelao</h5>
-                        <p>pedrojamelao@gmail.com</p>
-                        <p class="status status-ativo">PAID</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col s12 m6 l3 card">
-                <div class="card-content center-align">
-                    <div>
-                        <img class="avatar" src="{{asset('imgs/avatar.png')}}">
-                    </div>
-
-                    <div class="center-align">
-                        <h5 class="">Pedro Jamelao</h5>
-                        <p>pedrojamelao@gmail.com</p>
-                        <p class="status status-pendente">PENDING</p>
-                    </div>
-                </div>
-            </div>
-           <div class="right-align">
-               <a>Show more 10</a>
+                        <?php $count++;?>
+                @else
+                        <div class="col s12 m6 l3 card cardOPT cardInvisivel">
+                            <div class="card-content center-align">
+                                <div>
+                                    <img class="avatar" src="{{asset('imgs/avatar.png')}}">
+                                </div>
+                                <div class="center-align">
+                                    <h5 class="">{{$u->nome}}</h5>
+                                    <p>{{$u->email}}</p>
+                                    <p class="status <?=$corStatus;?>">{{strtoupper($u->status)}}</p>
+                                </div>
+                            </div>
+                        </div>
+                @endif
+            @endforeach
+           <div id="mostrarCards" class="right-align">
+               <a onclick="showContratos(1);" style="cursor: pointer;">Show All</a>
            </div>
         </div>
     </div>
@@ -85,6 +79,17 @@
 
 <script src="{{ asset('assets/materialize/js/materialize.js') }}"></script>
 <script>
+    function showContratos(opt){
+        if(opt == 1){
+            $(".cardOPT").removeClass("cardInvisivel");
+            $('#mostrarCards').html('<a onclick="showContratos(0);" style="cursor: pointer;">Hide All<a>');
+        }else if(opt == 0){
+            $(".cardOPT").addClass("cardInvisivel");
+            $('#mostrarCards').html('<a onclick="showContratos(1);" style="cursor: pointer;">Show All<a>');
+
+        }
+
+    }
     $(document).ready(function(){
         $('.modal').modal();
         $('select').formSelect();
