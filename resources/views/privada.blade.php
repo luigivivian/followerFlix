@@ -4,7 +4,6 @@
 @section('content')
 <div id="conteudo">
     <div class="row">
-
         <div>
             @if(session()->get('usuarioAtivo') == false)
                 <div class="col s12 m6 l12 cardBotoes card">
@@ -39,7 +38,6 @@
                             $corStatus = 'status-inativo';
                             break;
                     }
-
                 ?>
                 @if($count <= 4)
                     <div class="col s12 m6 l3 card">
@@ -83,12 +81,22 @@
         </div>
 
         <div class="col s12 l6">
-            <button class="btn vermelho branco-txt">LINK CONVITE</button>
+            <a class="waves-effect waves-light btn vermelho branco-txt modal-trigger" href="#modalLink">LINK CONVITE</a>
         </div>
     </div>
     <div class="cardBotoes center-align">
 
     </div>
+    {{--Modal convite--}}
+    <div id="modalLink" class="modal">
+        <div class="modal-content center-align">
+            <h5>Seu link de convite</h5>
+            <h5>Copie e compartilhe para convidar novos membros</h5>
+            <p>{{url('/registrar/'.session()->get('user')->token)}}</p>
+        </div>
+
+    </div>
+    {{--Fim modal convite--}}
     @endif
 
 </div>

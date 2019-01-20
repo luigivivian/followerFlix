@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Ativacao;
 use App\Enums\Enuns;
+use App\Usuario;
 use Illuminate\Http\Request;
 
 class AtivacaoController extends Controller
@@ -20,7 +21,7 @@ class AtivacaoController extends Controller
                 $user->desativarUsuario($u);
                 $a->desativarAtivacao($ativacao);
                 return false;
-            } else if (date("Y-m-d") < date('Y-m-d', strtotime($ativacao->dataValidade)) && $ativacao->status == Enuns::ativacao_ativo && $ativacao->pago == Enuns::ativacao_pago) {
+            } else if (date("Y-m-d") < date('Y-m-d', strtotime($ativacao->dataValidade)) && $ativacao->status == Enuns::ativacao_ativo && $ativacao->pago == Enuns::ativacao_pagamento_pago) {
                 return true;
             }
         } else {
@@ -48,14 +49,17 @@ class AtivacaoController extends Controller
     {
         $u = session()->get('user');
         $a = new Ativacao();
-        $pagamento = $a->verificarPagamento($u); //verifica pagamento no banco de dados
+        $pagamento = $a->verificarPagamento($u); //verifica pagamento no banco de dados só ativa se o pagamento é aprovado
         $ativacao = $a->getAtivacao($u);
         if($pagamento == true){
             $a->confirmarAtivacao($ativacao);
+            $user = new Usuario();
+            $user->ativarUsuario($u);
             $dados['error'] = "Pagamento aprovado, conta ativa";
             return view('autenticacao.login', $dados);
         }else{
-            return "Pagamento não aprovado !!!";
+            $dados['error'] = "Pagamento não aprovado !";
+            return view('autenticacao.login', $dados);
         }
     }
 

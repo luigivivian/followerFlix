@@ -40,14 +40,15 @@
                 <input name="tokenConvite" type="text" hidden value="{{$token->token}}">
             @endif
             <div class="row">
-                <div class="input-field col s6">
-                    <input placeholder="Digite seu Nome" name="nome" id="nome" type="text" class="validate" required>
+                <div class="input-field col s12 l6">
+                    <input placeholder="Digite seu Nome completo" name="nome" id="nome" type="text" class="validate" required>
                     <label for="nome">Nome</label>
                 </div>
-                <div class="input-field col s6">
-                    <input placeholder="Digite seu Sobrenome" name="sobrenome" id="sobrenome" type="text" class="validate" required>
-                    <label for="sobrenome">Sobrenome</label>
+                <div class="input-field col s12 l6">
+                    <input placeholder="Digite seu login" name="login" id="login" type="text" class="validate" required>
+                    <label for="login">Login</label>
                 </div>
+
             </div>
 
             <div class="row">
@@ -85,13 +86,6 @@
                </div>
             </div>
 
-
-            <div class="row">
-                <div class="input-field col s12 l12">
-                    <input placeholder="Digite seu login" name="login" id="login" type="text" class="validate" required>
-                    <label for="login">Login</label>
-                </div>
-            </div>
 
             <div class="row">
                 <div class="input-field col s6 l6">

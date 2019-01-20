@@ -18,7 +18,7 @@ class AtivacaoTable extends Migration
             $table->increments('id');
             $table->date('dataCompra')->nullable();
             $table->string('status')->default(Enuns::ativacao_inativo);
-            $table->string('pago')->default(Enuns::ativacao_naoPago);
+            $table->string('pago')->default(Enuns::ativacao_pagamento_naoPago);
             $table->date('dataValidade')->nullable();
             $table->string('currency_code')->nullable();
             $table->string('transacao_key')->nullable();

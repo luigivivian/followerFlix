@@ -27,7 +27,7 @@ class Ativacao extends Model
             ->select('u.id', 'u.nome', 'at.*')
             ->where([
                 ['u.id', '=', $u->id],
-                ['at.pago', '=', Enuns::ativacao_pago],
+                ['at.pago', '=', Enuns::ativacao_pagamento_pago],
             ])->get();
 
         if($ativacao->first() != null){
@@ -43,7 +43,7 @@ class Ativacao extends Model
             ->where('id', $a->id)->update(
                 array(
                     'status' => Enuns::ativacao_ativo,
-                    'pago'=> Enuns::ativacao_pago)
+                    'pago'=> Enuns::ativacao_pagamento_pago)
             );
         return $query;
     }
@@ -54,7 +54,7 @@ class Ativacao extends Model
                     ->where('id', $a->id)->update(
                     array(
                         'status' => Enuns::ativacao_invalida,
-                        'pago'=> Enuns::ativacao_fim)
+                        'pago'=> Enuns::ativacao_pagamento_fim)
                     );
         return $query;
     }
