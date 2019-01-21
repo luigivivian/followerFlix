@@ -40,8 +40,14 @@
                 <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
                 <a href="{{route('logout')}}">SAIR: {{session()->get('user')->nome}} </a>
                 <ul class="right hide-on-med-and-down">
-                    <li><a class="red-text text-lighten-1"> {{session()->get('user')->nome}}</a></li>
-                    <li><a class="dropdown-trigger red-text text-lighten-1" href="#!" data-target="dropdown1"><img style="margin-top: 5px; height: 50px; width: 50px;" src="{{asset('imgs/avatar.png')}}"><i class="material-icons right">arrow_drop_down</i></a></li>
+                    <li><a data-target="dropdown1" class="dropdown-trigger red-text text-lighten-1"> {{session()->get('user')->nome}}<i class="material-icons right">arrow_drop_down</i></a></li>
+                    <li>
+                        <a class="red-text text-lighten-1" href="#!">
+                            <div class="circle">
+                                <img style="" href="{{route('myprofile')}}" src="{{ asset('storage/uploads/avatar/'.session()->get('user')->avatar_img) }}">
+                            </div>
+                        </a>
+                    </li>
                 </ul>
                 </ul>
             </div>

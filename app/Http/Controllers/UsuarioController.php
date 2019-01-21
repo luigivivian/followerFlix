@@ -5,6 +5,8 @@ use App\Ativacao;
 use App\Usuario;
 use Illuminate\Http\Request;
 use Exception;
+use Nexmo\Response;
+
 class UsuarioController extends Controller
 {
     public function login()
@@ -106,12 +108,30 @@ class UsuarioController extends Controller
 
     }
     public function update(Request $request, $id){
-        $u = Usuario::find($id)->update($request->all());
+        $data = $request->all();
+        $usuario = Usuario::where('id', $id)->first();
+        $data['avatar_img'] = $usuario->avatar_img;
+        if($request->hasFile('avatar_img') && $request->file('avatar_img')->isValid()){
+
+            $name = $usuario->id.kebab_case($usuario->nome);
+
+            $extension = $request->avatar_img->extension();
+            $nameFile = "{$name}.{$extension}";
+            $data['avatar_img'] = $nameFile;
+            $upload = $request->avatar_img->storeAs('public/uploads/avatar', $nameFile);
+
+            if(!$upload){
+                $dados['error'] = "Falha ao atualizar imagem";
+                return view('usuarios.edit', $dados);
+            }
+        }
+        $u = Usuario::find($id)->update($data);
         $dados['msg'] = "Dados Alterados !";
         $usuario = Usuario::where('id', $id)->first();
         $dados['user'] = $usuario;
-        return view('usuarios.edit', $dados);
+        //$response = json_encode(array('error'=>false, 'data'=>$dados));
 
+        return view('usuarios.edit', $dados);
     }
 
     public function profissionalFilter(){

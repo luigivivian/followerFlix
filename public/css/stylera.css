@@ -137,7 +137,6 @@ body{
     width: 90px;
     height: 75px;
     z-index: 15;
-    
 }
 
 .status{
@@ -193,5 +192,44 @@ body{
 .input-group .input-field,
 .input-group .input-group-addon{
     display:table-cell;
+}
 
+.cardAvatar{
+    background: linear-gradient(to bottom right, #ff5050 43%, #cc0000 76%);
+    border-radius: 5px;
+}
+.cardAvatar textarea{
+    background: white;
+}
+.cardAvatar label{
+    color: white;
+}
+
+
+.circle {
+    background-color: #aaa;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    overflow: hidden;
+    position: relative;
+}
+
+.circle img {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.avatarPerfil{
+    margin-top:10%;
+    background-color: #ddd;
+    border-radius: 100%;
+    height: 150px;
+    object-fit: cover;
+    width: 150px;
+}
+
+.textareaPerfil{
+    height: 100px;
 }

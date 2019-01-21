@@ -14,7 +14,7 @@ class AddColumnsUser extends Migration
     public function up()
     {
         Schema::table('usuarios', function($table) {
-            $table->string('avatar_img');
+            $table->string('avatar_img')->nullable();
             $table->string('idade');
             $table->string('interesse');
             $table->string('prestacao_servico'); // presta serviço de engajamento para facebook
