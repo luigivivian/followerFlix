@@ -22,13 +22,22 @@ class Servico extends Model
         return true;
     }
 
-    public function getContratos($id){
-        $users = DB::table('usuarios AS u')
-            ->join('servicos AS s', 'u.id', '=', 's.id_contratante')
-            ->join('usuarios AS up', 'up.id', '=', 's.id_prestante')
-            ->select('up.nome', 'up.email', 's.status')
-            ->where('u.id', $id)
-            ->get();
+    public function getContratos($idUser = null, $idContrato = null){
+        if($idContrato == null){
+            $users = DB::table('usuarios AS u')
+                ->join('servicos AS s', 'u.id', '=', 's.id_contratante')
+                ->join('usuarios AS up', 'up.id', '=', 's.id_prestante')
+                ->select('s.id as idcontrato','up.nome', 'up.email', 's.status')
+                ->where('u.id', $idUser)
+                ->get();
+        }else{
+            $users = DB::table('usuarios AS u')
+                ->join('servicos AS s', 'u.id', '=', 's.id_contratante')
+                ->join('usuarios AS up', 'up.id', '=', 's.id_prestante')
+                ->select('s.id as idcontrato','up.nome as nome_prestante', 'up.email as email_prestante', 's.status')
+                ->where('s.id', $idContrato)
+                ->get();
+        }
         return $users->toArray();
     }
 //select * from usuarios u

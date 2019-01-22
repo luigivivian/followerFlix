@@ -76,6 +76,15 @@
             </div>
         </div>
     </div>
+
+
+        <footer>
+            <div id="footer" class="center-align">
+                <h5>Rodapé</h5>
+            </div>
+        </footer>
+
+
 </div>
 
 <script src="{{ asset('js/bootstrap/Jquery.js') }}"></script>

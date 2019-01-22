@@ -39,7 +39,8 @@
                     }
                 ?>
                 @if($count <= 4)
-                    <div class="col s12 m6 l3 card">
+
+                    <div class="col s12 m6 l3 card" onclick="visualizarContrato('<?= $u->idcontrato?>')">
                         <div class="card-content center-align">
                             <div>
                                 <img class="avatar" src="{{asset('imgs/avatar.png')}}">
@@ -48,12 +49,14 @@
                                 <h5 class="">{{$u->nome}}</h5>
                                 <p>{{$u->email}}</p>
                                 <p class="status <?=$corStatus;?>">{{strtoupper($u->status)}}</p>
+                                <br>
+                                <p class="status verde">Clique para visualizar</p>
                             </div>
                         </div>
                     </div>
                         <?php $count++;?>
                 @else
-                        <div class="col s12 m6 l3 card cardOPT cardInvisivel">
+                        <div class="col s12 m6 l3 card cardOPT cardInvisivel" onclick="visualizarContrato('<?= $u->idcontrato?>')">
                             <div class="card-content center-align">
                                 <div>
                                     <img class="avatar" src="{{asset('imgs/avatar.png')}}">
@@ -62,6 +65,8 @@
                                     <h5 class="">{{$u->nome}}</h5>
                                     <p>{{$u->email}}</p>
                                     <p class="status <?=$corStatus;?>">{{strtoupper($u->status)}}</p>
+                                    <br>
+                                    <p class="status verde">Clique para visualizar</p>
                                 </div>
                             </div>
                         </div>
@@ -114,6 +119,10 @@
 
         }
 
+    }
+    function visualizarContrato(id){
+        console.log(id);
+        window.location.href = 'contrato/'+id+'/visualizar'; //using a named route
     }
     $(document).ready(function(){
         $('.modal').modal();

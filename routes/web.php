@@ -37,4 +37,9 @@ Route::middleware(['auth'])->group(function () {
         Route::get('filter',   ['as'=>'user.filter',    'uses'=> 'UsuarioController@filtrar'] );
     });
 
+    Route::group(['prefix'=>'contrato', 'where'=>['id'=>'[0-9]+']], function() {
+        Route::get('{id}/visualizar',     ['as'=>'contrato.visualizar',      'uses'=> 'ServicoController@visualizar'] );
+
+    });
+
 });

@@ -22,4 +22,11 @@ class ServicoController extends Controller
         }
     }
 
+    public function visualizar(Request $request){
+        $idContrato = request('id');
+        $s = new Servico();
+        $dados['contrato'] = $s->getContratos(null, $idContrato);
+        return view('contrato.visualizar', $dados);
+    }
+
 }
