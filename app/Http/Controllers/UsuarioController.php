@@ -41,8 +41,15 @@ class UsuarioController extends Controller
             'login' => 'required|max:255',
             'email' => 'required|max:255',
             'senha' => 'required|max:255',
+            'senhaConfirma' => 'required|max:255',
             'genero' => 'required',
             'dataNascimento' => 'required',
+            'interesse' => 'required',
+            'idade' => 'required',
+            'prestacao_servico' => 'required',
+            'contratacao_servico' => 'required',
+            'metodoPagamento' => 'required'
+
         ];
 
         $msgError = [
@@ -97,6 +104,27 @@ class UsuarioController extends Controller
         }catch(Exception $exception) {
             $this->generateKeyAndCreateUser($dados);
         }
+    }
+
+    public function updatePassword(Request $request, $id){
+        $data = $request->all();
+        $data['senha'] = bcrypt($data['senhaNova']);
+        if($data['senhaNova'] != $data['senhaNovaConfirma']){
+            $dados['msg'] = "ERRO: As senhas não conferem";
+            $dados['error'] = true;
+        }else{
+            unset($data['senhaNovaConfirma']);
+            unset($data['senhaNova']);
+            $u = Usuario::find($id)->update($data);
+            if($u){
+                $dados['msg'] = "Dados Alterados com sucesso !";
+                $dados['error'] = false;
+            }else{
+                $dados['msg'] = "Erro ao atualizar dados";
+                $dados['error'] = true;
+            }
+        }
+        return response()->json($dados);
     }
 
     public function myProfile()
@@ -158,6 +186,21 @@ class UsuarioController extends Controller
         $u = new Usuario();
         $query = $u->desativarUsuario($u);
         return $query;
+    }
+
+    public function procurarUsuario(Request $request){
+        $u = new Usuario();
+        $data = $request->all();
+        $parametro = $data['procurar'];
+        $dados['users'] = $u->searchByEmailAndName($parametro);
+        return view('usuarios.list', $dados);
+    }
+
+    public function filtrar(Request $request){
+        $u = new Usuario();
+        $data = $request->all();
+        $dados['users'] = $u->filter($data);
+        return view('usuarios.list', $dados);
     }
 
 

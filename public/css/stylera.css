@@ -197,6 +197,7 @@ body{
 .cardAvatar{
     background: linear-gradient(to bottom right, #ff5050 43%, #cc0000 76%);
     border-radius: 5px;
+
 }
 .cardAvatar textarea{
     background: white;
@@ -233,3 +234,4 @@ body{
 .textareaPerfil{
     height: 100px;
 }
+

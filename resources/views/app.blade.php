@@ -71,14 +71,11 @@
 
     <div id="page-content-wrapper">
         <div id="page-content">
-
             <div>
                 @yield('content')
             </div>
         </div>
-
     </div>
-
 </div>
 
 <script src="{{ asset('js/bootstrap/Jquery.js') }}"></script>

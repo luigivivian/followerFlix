@@ -34,6 +34,9 @@ class AutenticacaoController extends Controller
         $usuario = Usuario::where('login', $login)->first();
         if(Auth::check() || ($usuario && Hash::check($senha, $usuario->senha))){
             Auth::login($usuario);
+            if($usuario->avatar_img == null){
+                $usuario->avatar_img = "avatarDefault.png";
+            }
             session(['user' => $usuario]);
             //Verificar ativacao e contratos
             $a = new AtivacaoController();

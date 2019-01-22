@@ -62,30 +62,72 @@
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col s12 l12">
-                    <label>Genero</label>
-                </div>
-               <div class="input-field row">
-                   <div class="col s6 l6">
-                       <p>
-                           <label>
-                               <input name="genero" value="masculino" type="radio" checked />
-                               <span>Masculino</span>
-                           </label>
-                       </p>
-                   </div>
-                   <div class="col s6 l6">
-                       <p>
-                           <label>
-                               <input name="genero" value="feminino" type="radio"  />
-                               <span>Feminino</span>
-                           </label>
-                       </p>
-                   </div>
-               </div>
-            </div>
 
+
+            <div class="row">
+
+                <div class="input-field col s12 l2">
+                    <select name="idade" required>
+                        <option value="" disabled selected>Idade</option>
+                        <option value="15">15-20</option>
+                        <option value="21">21-25</option>
+                        <option value="26">26-30</option>
+                        <option value="31">31-35</option>
+                        <option value="40">36-40</option>
+                        <option value="41">41-45</option>
+                        <option value="46">46-50</option>
+                    </select>
+                    <label>Idade</label>
+                </div>
+                <div class="input-field col s12 l2">
+                    <select required name="genero">
+                        <option value="" disabled selected>Genero</option>
+                        <option value="masculino" >Masculino</option>
+                        <option value="feminino" >Feminino</option>
+                    </select>
+                    <label>Selecione seu genero</label>
+                </div>
+                <div class="input-field col s12 l2">
+                    <select name="interesse">
+                        <option value="" disabled selected>Interesses</option>
+                        <option value="musica">Musica</option>
+                        <option value="tecnologia">Tecnologia</option>
+                        <option value="carros">Carros</option>
+                        <option value="esportes">Esportes</option>
+                        <option value="filmes">Filmes</option>
+                        <option value="moda">Moda</option>
+                    </select>
+                    <label>Interesse</label>
+                </div>
+                <div class="input-field col s12 l2">
+                    <select name="prestacao_servico" required>
+                        <option value="" disabled selected>Rede Social</option>
+                        <option value="facebook">Facebook</option>
+                        <option value="instagram">Instagram</option>
+                        <option value="youtube">Youtube</option>
+                        <option value="website">Website</option>
+                    </select>
+                    <label>Prestar engajamento</label>
+                </div>
+                <div class="input-field col s12 l2">
+                    <select name="contratacao_servico" required>
+                        <option value="" disabled selected>Rede Social</option>
+                        <option value="facebook">Facebook</option>
+                        <option value="instagram">Instagram</option>
+                        <option value="youtube">Youtube</option>
+                        <option value="website">Website</option>
+                    </select>
+                    <label>Receber engajamento</label>
+                </div>
+                <div class="input-field col s12 l2">
+                    <select name="metodoPagamento" required>
+                        <option value="" disabled selected>Pagamento</option>
+                        <option value="pagseguro">Pagseguro</option>
+                        <option value="paypal">PayPal</option>
+                    </select>
+                    <label>Metodo pagamento</label>
+                </div>
+            </div>
 
             <div class="row">
                 <div class="input-field col s6 l6">
@@ -116,7 +158,12 @@
 
 
 
-
+<script>
+    $(document).ready(function(){
+        $('.modal').modal();
+        $('select').formSelect();
+    });
+</script>
 
 
 </body>

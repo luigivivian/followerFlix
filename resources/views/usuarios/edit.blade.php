@@ -4,6 +4,7 @@
     <div class="col s12 l12" id="conteudo">
         <?php
             $idUser = session()->get('user')->id;
+
         ?>
         {!! Form::open(['method'=>'PUT', 'route'=>['user.update', $user->id], 'files' => true, 'name'=>'formDados']) !!}
         {{  csrf_field() }}
@@ -44,6 +45,14 @@
                                <input placeholder="Fim ativação" style="color: red;" readonly value="{{$ativacao}}" name="dataExpiracao" id="dataExpiracao" type="text" class="validate" required>
                                <label for="dataExpiracao">Data fim ativação</label>
                            </div>
+
+
+                       </div>
+                       <div class="col s4 l4">
+                           <div class="input-field col s12">
+                                   <input placeholder="Nome" name="email" value="{{ $user->email }}" id="email" type="text" class="validate" required>
+                                <label for="sobrenome">Email</label>
+                           </div>
                            <div class="input-field col s12">
                                <select required name="metodoPagamento">
                                    <option value="" disabled selected>Payment</option>
@@ -52,23 +61,8 @@
                                </select>
                                <label>Payment method</label>
                            </div>
+                       </div>
 
-                       </div>
-                       <div class="col s4 l4">
-                           <div class="input-field col s12">
-                                   <input placeholder="Nome" name="email" value="{{ $user->email }}" id="email" type="text" class="validate" required>
-                                <label for="sobrenome">Email</label>
-                           </div>
-                       </div>
-                      <div class="row">
-                          <div class="input-field col s12 l4 center-align">
-                              <button class="amarelo btn btn-small modal-trigger" href="#modal1">Change Password</button>
-                          </div>
-                          <div class="input-field col s12 l4 center-align">
-                              <button type="submit" class="verde btn btn-small">SAVE</button>
-                              {{--{!! Form::submit('Submit', ['class' => 'btn form-control']) !!}--}}
-                          </div>
-                      </div>
                    </div>
             </div>
         </div>
@@ -81,53 +75,53 @@
                         <div class="input-field col s12 l2">
                             <select name="idade" required>
                                 <option value="" disabled selected>Idade</option>
-                                <option value="1">15-20</option>
-                                <option value="2">21-25</option>
-                                <option value="3">26-30</option>
-                                <option value="3">31-35</option>
-                                <option value="2">36-40</option>
-                                <option value="3">41-45</option>
-                                <option value="3">46-50</option>
+                                <option value="15" <?= $user->idade >= 15 && $user->idade <= 20 ? "selected" : ''; ?>>15-20</option>
+                                <option value="21"<?= $user->idade >= 21 && $user->idade <= 25 ? "selected" : ''; ?>>21-25</option>
+                                <option value="26"<?= $user->idade >= 26 && $user->idade <= 30 ? "selected" : ''; ?>>26-30</option>
+                                <option value="31"<?= $user->idade >= 31 && $user->idade <= 35 ? "selected" : ''; ?>>31-35</option>
+                                <option value="40"<?= $user->idade >= 36 && $user->idade <= 40 ? "selected" : ''; ?>>36-40</option>
+                                <option value="41"<?= $user->idade >= 41 && $user->idade <= 45 ? "selected" : ''; ?>>41-45</option>
+                                <option value="46"<?= $user->idade >= 46 && $user->idade <= 50 ? "selected" : ''; ?>>46-50</option>
                             </select>
                             <label>Idade</label>
                         </div>
                         <div class="input-field col s12 l2">
                             <select required name="genero">
                                 <option value="" disabled selected>Genero</option>
-                                <option value="m">Masculino</option>
-                                <option value="f">Feminino</option>
+                                <option value="masculino" <?= $user->genero == "masculino" ? "selected" : ''; ?>>Masculino</option>
+                                <option value="feminino" <?= $user->genero == "feminino" ? "selected" : ''; ?>>Feminino</option>
                             </select>
                             <label>Selecione seu genero</label>
                         </div>
                         <div class="input-field col s12 l2">
                             <select name="interesse">
                                 <option value="" disabled selected>Interesses</option>
-                                <option value="1">Musica</option>
-                                <option value="2">Tecnologia</option>
-                                <option value="3">Carros</option>
-                                <option value="3">Esportes</option>
-                                <option value="3">Filmes</option>
-                                <option value="4">Moda</option>
+                                <option value="musica"<?= $user->interesse == "musica" ? "selected" : ''; ?>>Musica</option>
+                                <option value="tecnologia"<?= $user->interesse == "tecnologia" ? "selected" : ''; ?>>Tecnologia</option>
+                                <option value="carros"<?= $user->interesse == "carros" ? "selected" : ''; ?>>Carros</option>
+                                <option value="esportes"<?= $user->interesse == "esportes" ? "selected" : ''; ?>>Esportes</option>
+                                <option value="filmes"<?= $user->interesse == "filmes" ? "selected" : ''; ?>>Filmes</option>
+                                <option value="moda"<?= $user->interesse == "moda" ? "selected" : ''; ?>>Moda</option>
                             </select>
                             <label>Interesse</label>
                         </div>
                         <div class="input-field col s12 l2">
-                            <select name="redeSocialPrestar" required>
-                                <option value="" disabled selected>Rede Social</option>
-                                <option value="facebook">Facebook</option>
-                                <option value="instagram">Instagram</option>
-                                <option value="youtube">Youtube</option>
-                                <option value="website">Website</option>
+                            <select name="prestacao_servico" required>
+                                <option value="" disabled>Rede Social</option>
+                                <option value="facebook"<?= $user->prestacao_servico == "facebook" ? "selected" : ''; ?>>Facebook</option>
+                                <option value="instagram"<?= $user->prestacao_servico == "instagram" ? "selected" : ''; ?>>Instagram</option>
+                                <option value="youtube"<?= $user->prestacao_servico == "youtube" ? "selected" : ''; ?>>Youtube</option>
+                                <option value="website"<?= $user->prestacao_servico == "website" ? "selected" : ''; ?>>Website</option>
                             </select>
                             <label>Prestar engajamento</label>
                         </div>
                         <div class="input-field col s12 l2">
-                            <select name="redeSocialContratar" required>
-                                <option value="" disabled selected>Rede Social</option>
-                                <option value="facebook">Facebook</option>
-                                <option value="instagram">Instagram</option>
-                                <option value="youtube">Youtube</option>
-                                <option value="website">Website</option>
+                            <select name="contratacao_servico" required>
+                                <option value="" disabled>Rede Social</option>
+                                <option value="facebook"<?= $user->contratacao_servico == "facebook" ? "selected" : ''; ?>>Facebook</option>
+                                <option value="instagram"<?= $user->contratacao_servico == "instagram" ? "selected" : ''; ?>>Instagram</option>
+                                <option value="youtube"<?= $user->contratacao_servico == "youtube" ? "selected" : ''; ?>>Youtube</option>
+                                <option value="website"<?= $user->contratacao_servico == "website" ? "selected" : ''; ?>>Website</option>
                             </select>
                             <label>Receber engajamento</label>
                         </div>
@@ -137,9 +131,17 @@
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="input-field col s12 l12 center-align">
+                    <button class="amarelo btn btn-small modal-trigger" href="#modal1">Change Password</button>
+                    <button type="submit" class="verde btn btn-small">SAVE</button>
+                </div>
+
+            </div>
         {!! Form::close() !!}
         <div id="modal1" class="modal">
-            <form>
+            {!! Form::open(['name'=>'formSenha']) !!}
+            {{  csrf_field() }}
                 <div class="">
                     <h5 class="center-align">Confirme os dados para alterar sua senha</h5>
                     <div class="modal-content">
@@ -157,11 +159,11 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="modal-close waves-effect waves-green btn verde">Save</button>
+                        <button type="submit" id="btnSenhaAlterar" class="modal-close waves-effect waves-green btn verde">Save</button>
                         <button type="button" class="modal-close waves-effect waves-red btn vermelho">Close</button>
                     </div>
                 </div>
-            </form>
+            {!! Form::close() !!}
         </div>
     </div>
 
@@ -179,6 +181,31 @@
         $(document).ready(function(){
                 $('.modal').modal();
                 $('select').formSelect();
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $("#btnSenhaAlterar").click(function(e) {
+                e.preventDefault();
+                var senha = $("#senhaAtual").val();
+                var senhaNova = $("#senhaNova").val();
+                var senhaNovaConfirma = $('#senhaNovaConfirma').val();
+                $.ajax({
+                    dataType: 'json',
+                    type:'PUT',
+                    url: '<?= route('user.updatepassword', $idUser); ?>',
+                    data:{senha:senha, senhaNova:senhaNova, senhaNovaConfirma:senhaNovaConfirma}
+                }).done(function(data){
+                    console.log(data);
+                    if(data.error == false){
+                        M.toast({html: data.msg, classes: 'verde'});
+                    }else{
+                        M.toast({html: data.msg, classes: 'vermelho'});
+                    }
+
+                });
+            });
         });
     </script>
   @endsection

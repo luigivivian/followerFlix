@@ -32,7 +32,9 @@ Route::middleware(['auth'])->group(function () {
         Route::get('{id}/edit',     ['as'=>'user.edit',      'uses'=> 'UsuarioController@myProfile'] );
         Route::get('/buscar',     ['as'=>'user.buscar',      'uses'=> 'UsuarioController@buscarUsuario'] );
         Route::put('{id}/update',   ['as'=>'user.update',    'uses'=> 'UsuarioController@update'] );
-
+        Route::put('{id}/updatepassword',   ['as'=>'user.updatepassword',    'uses'=> 'UsuarioController@updatePassword'] );
+        Route::get('search',   ['as'=>'user.search',    'uses'=> 'UsuarioController@procurarUsuario'] );
+        Route::get('filter',   ['as'=>'user.filter',    'uses'=> 'UsuarioController@filtrar'] );
     });
 
 });

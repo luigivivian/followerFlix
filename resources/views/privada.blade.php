@@ -8,7 +8,6 @@
             @if(session()->get('usuarioAtivo') == false)
                 <div class="col s12 m6 l12 cardBotoes card">
                     <div class="card-content center-align">
-
                         <div class="center-align">
                             <h5 class="vermelho2-txt">VOCÊ ESTÁ INATIVO</h5>
                             <h5 class="">Você precisa ativar sua conta para contratar e ser contratado</h5>
