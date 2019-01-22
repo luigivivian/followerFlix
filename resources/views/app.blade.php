@@ -10,22 +10,27 @@
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- HELPERS -->
+
+    {{--CSS LINKS--}}
     <link rel="stylesheet" type="text/css" href="{{ asset('css/stylera.css') }}">
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/contratoCSS/contratoStyle.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/responsividade/responsividade.css') }}">
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:300" rel="stylesheet">
     <title>Builder All</title>
 </head>
 <style>
-    @font-face {
-        font-family: OptimusPrinceps;
-        src: url('{{ public_path('fonts/Bariol.tff') }}');
-    }
-    @font-face {
-        font-family: Bariol;
 
+    body {
+        font-family: 'Lato', sans-serif !important;
     }
 </style>
 <body>
 
-<div id="app" style="margin-top: 0px; !important;">
+<div id="app" style="margin-top: 0px; !important;" class="container-fluid">
 
     <div id="lateralMenu">
         <ul id="dropdown1" class="dropdown-content ">
@@ -66,23 +71,21 @@
             <li><a href="#!">CALCULATOR</a></li>
             <li><a href="#!">YOUR PAYMENTS</a></li>
         </ul>
-
     </div>
 
-    <div id="page-content-wrapper">
-        <div id="page-content">
+    <div>
             <div>
                 @yield('content')
             </div>
-        </div>
-    </div>
-
-
         <footer>
             <div id="footer" class="center-align">
                 <h5>Rodapé</h5>
             </div>
         </footer>
+    </div>
+
+
+
 
 
 </div>

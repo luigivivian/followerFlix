@@ -3,11 +3,6 @@
     padding-left: 300px;
 }
 
-@media only screen and (max-width : 992px) {
-    #conteudo {
-        padding-left: 0;
-    }
-}
 .dropdown-content {
     top: 100% !important;
 }
@@ -157,11 +152,7 @@ body{
 .card{
     margin-top: 5%;
 }
-@media only screen and (max-width : 992px) {
-    .card{
-        margin-top: 20%;
-    }
-}
+
 .avatar{
     position: absolute;
     z-index: 1;
@@ -236,7 +227,7 @@ body{
 }
 
 html, body {
-    height: 100%;
+    height: 110%;
 }
 #app{
     min-height: 100%;
@@ -252,3 +243,5 @@ html, body {
     padding-left: 300px;
     color:white;
 }
+
+

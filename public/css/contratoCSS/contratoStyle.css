@@ -1,0 +1,23 @@
+.boxContrato{
+    border-style: solid;
+    border-width: 1px;
+    background: linear-gradient(to bottom, #33ccff 0%, #ff99cc 100%);
+    border-radius: 25px;
+    padding-bottom: 8%;
+    padding-left: 8%;
+    padding-right: 8%;
+    padding-top: 4%;
+    background: linear-gradient(to bottom, #ff0000 0%, #ff3300 100%);
+}
+.boxContrato img{
+    background-color: #aaa;
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    overflow: hidden;
+    position: relative;
+}
+
+html body{
+    height: 140%;
+}

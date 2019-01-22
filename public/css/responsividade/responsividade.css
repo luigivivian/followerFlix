@@ -1,0 +1,22 @@
+@media only screen and (max-width: 992px) {
+    #footer{
+        padding-left: 0 !important;
+    }
+}
+@media only screen and (max-width : 992px) {
+    .card{
+        margin-top: 20%;
+    }
+}
+
+@media only screen and (max-width : 992px) {
+    #conteudo {
+        padding-left: 0;
+    }
+}
+
+/*classe col ta com bug usar isso para ajustar o centro*/
+.ajusteCenter{
+    margin: 0 auto;
+    float: unset !important;
+}

@@ -27,14 +27,14 @@ class Servico extends Model
             $users = DB::table('usuarios AS u')
                 ->join('servicos AS s', 'u.id', '=', 's.id_contratante')
                 ->join('usuarios AS up', 'up.id', '=', 's.id_prestante')
-                ->select('s.id as idcontrato','up.nome', 'up.email', 's.status')
+                ->select('s.id as idcontrato','up.nome as nome_prestante', 'up.email as email_prestante', 's.status', 's.tipoServico', 'up.metodoPagamento')
                 ->where('u.id', $idUser)
                 ->get();
         }else{
             $users = DB::table('usuarios AS u')
                 ->join('servicos AS s', 'u.id', '=', 's.id_contratante')
                 ->join('usuarios AS up', 'up.id', '=', 's.id_prestante')
-                ->select('s.id as idcontrato','up.nome as nome_prestante', 'up.email as email_prestante', 's.status')
+                ->select('s.id as idcontrato','up.nome as nome_prestante', 'up.email as email_prestante', 's.status', 's.tipoServico','up.metodoPagamento')
                 ->where('s.id', $idContrato)
                 ->get();
         }

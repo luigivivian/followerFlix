@@ -21,6 +21,7 @@
         @if(session()->get('usuarioAtivo') == true)
             <div class="center-align vermelho-txt">
                 <h4>Seus contratos</h4>
+                <p>Os 10 primeiros contratos são obrigatórios</p>
             </div>
         <div class="row col s12 m12 l12"> <!--1st row containing 2 cards-->
             <?php $count = 1;?>
@@ -46,8 +47,8 @@
                                 <img class="avatar" src="{{asset('imgs/avatar.png')}}">
                             </div>
                             <div class="center-align">
-                                <h5 class="">{{$u->nome}}</h5>
-                                <p>{{$u->email}}</p>
+                                <h5 class="">{{$u->nome_prestante}}</h5>
+                                <p>{{$u->email_prestante}}</p>
                                 <p class="status <?=$corStatus;?>">{{strtoupper($u->status)}}</p>
                                 <br>
                                 <p class="status verde">Clique para visualizar</p>
@@ -62,8 +63,8 @@
                                     <img class="avatar" src="{{asset('imgs/avatar.png')}}">
                                 </div>
                                 <div class="center-align">
-                                    <h5 class="">{{$u->nome}}</h5>
-                                    <p>{{$u->email}}</p>
+                                    <h5 class="">{{$u->nome_prestante}}</h5>
+                                    <p>{{$u->email_prestante}}</p>
                                     <p class="status <?=$corStatus;?>">{{strtoupper($u->status)}}</p>
                                     <br>
                                     <p class="status verde">Clique para visualizar</p>
