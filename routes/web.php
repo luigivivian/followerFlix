@@ -39,7 +39,10 @@ Route::middleware(['auth'])->group(function () {
 
     Route::group(['prefix'=>'contrato', 'where'=>['id'=>'[0-9]+']], function() {
         Route::get('{id}/visualizar',     ['as'=>'contrato.visualizar',      'uses'=> 'ServicoController@visualizar'] );
+    });
 
+    Route::group(['prefix'=>'redflag', 'where'=>['id'=>'[0-9]+']], function() {
+        Route::get('{id}/visualizar',     ['as'=>'redflag.visualizar',      'uses'=> 'RedFlagController@index'] );
     });
 
 });

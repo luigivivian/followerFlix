@@ -15,6 +15,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/stylera.css') }}">
 
     <link rel="stylesheet" type="text/css" href="{{ asset('css/contratoCSS/contratoStyle.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/redFlags/redflag.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/responsividade/responsividade.css') }}">
 
 
@@ -65,7 +66,7 @@
             <li><a href="{{route('getprofissional')}}">GET MORE PROFESSIONALS</a></li>
             <li><a href="#!">CLIENTE / TAREFA</a></li>
             <li><a href="#!">YOUR DOWNLINE</a></li>
-            <li><a href="#!">RED FLAG</a></li>
+            <li><a href="{{route('redflag.visualizar', session()->get('user')->id)}}">RED FLAG</a></li>
             <li><a href="{{route('myprofile')}}">YOUR ACCOUNT</a></li>
             <li><a href="#!">SUPPORT</a></li>
             <li><a href="#!">CALCULATOR</a></li>

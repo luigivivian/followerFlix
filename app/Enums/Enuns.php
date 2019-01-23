@@ -29,6 +29,12 @@ final class Enuns extends Enum
     const admin = "A";
 
 
+    //redflags
+    const redflag_status_analise = "Em analise";
+    const redflag_status_aprovada = "Aprovada";
+    const redflag_status_negada = "Negada";
+
+
 
 
 }

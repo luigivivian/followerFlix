@@ -15,6 +15,12 @@
     }
 }
 
+@media only screen and (max-width : 992px) {
+    #footer {
+        top: 120%;
+    }
+}
+
 /*classe col ta com bug usar isso para ajustar o centro*/
 .ajusteCenter{
     margin: 0 auto;
