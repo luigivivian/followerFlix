@@ -55,8 +55,10 @@ class Usuario extends Authenticatable
     }
 
     public function filter($data){
+//        self::where([['email','=',$email],['password','=', $password]])
+        //ajustar query busca
         $user =  DB::table('usuarios')
-            ->where('idade','LIKE','%'.$data['idade'].'%')->where('status','=','1')->where('id','>','1')
+            ->where('idade','>=', $data['idade'])->where('idade','<=', ($data['idade'] + 4))->where('status','=','1')->orWhere('id','>','1')
             ->where('genero','LIKE','%'.$data['genero'].'%')
             ->where('interesse','LIKE','%'.$data['interesse'].'%')
             ->where('prestacao_servico','LIKE','%'.$data['prestacao_servico'].'%')->limit(15)->get();

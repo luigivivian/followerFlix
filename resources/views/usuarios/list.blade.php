@@ -12,7 +12,7 @@
             <div id="acessoPadrao">
                 <div class="row col s12 m12 l12"> <!--1st row containing 2 cards-->
                     @foreach($users as $u)
-                        <div class="col s12 m6 l3 card">
+                        <div class="col s12 m6 l3 card" onclick="visualizarContrato('<?= $u->id?>')">
                             <div class="card-content center-align">
                                 <div>
                                     <img class="avatar" src="{{asset('imgs/avatar.png')}}">
@@ -39,6 +39,10 @@
 
     <script src="{{ asset('assets/materialize/js/materialize.js') }}"></script>
     <script>
+        function visualizarContrato(id){
+            console.log(id);
+            window.location.href = '.../contrato/'+id+'/visualizar'; //using a named route
+        }
         $(document).ready(function(){
 
         });

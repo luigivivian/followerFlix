@@ -145,14 +145,12 @@ body{
     -moz-border-radius: 9px;
     border-radius: 9px;
 }
-
 .card-content{
     position: relative;
 }
 .card{
     margin-top: 5%;
 }
-
 .avatar{
     position: absolute;
     z-index: 1;
@@ -166,7 +164,6 @@ body{
 }
 .status-ativo {
     background-color: #36d484;
-
 }
 .status-pendente {
     background-color: #ffbd20;
@@ -174,21 +171,17 @@ body{
 .status-inativo {
     background-color: #f0253d;
 }
-
 .input-group{
     margin-left: 1%;
     display:table;
 }
-
 .input-group .input-field,
 .input-group .input-group-addon{
     display:table-cell;
 }
-
 .cardAvatar{
     background: linear-gradient(to bottom right, #ff5050 43%, #cc0000 76%);
     border-radius: 5px;
-
 }
 .cardAvatar textarea{
     background: white;
@@ -196,8 +189,6 @@ body{
 .cardAvatar label{
     color: white;
 }
-
-
 .circle {
     background-color: #aaa;
     border-radius: 50%;
@@ -206,13 +197,11 @@ body{
     overflow: hidden;
     position: relative;
 }
-
 .circle img {
     position: absolute;
     bottom: 0;
     width: 100%;
 }
-
 .avatarPerfil{
     margin-top:10%;
     background-color: #ddd;
@@ -221,11 +210,9 @@ body{
     object-fit: cover;
     width: 150px;
 }
-
 .textareaPerfil{
     height: 100px;
 }
-
 html, body {
     height: 110%;
 }

@@ -40,7 +40,6 @@
                     }
                 ?>
                 @if($count <= 4)
-
                     <div class="col s12 m6 l3 card" onclick="visualizarContrato('<?= $u->idcontrato?>')">
                         <div class="card-content center-align">
                             <div>
