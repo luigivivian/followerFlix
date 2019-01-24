@@ -88,10 +88,11 @@
                             </select>
                             <label>Prestar engajamento</label>
                         </div>
+                        <div class="center-align mb-4">
+                            <button class="btn verde branco-txt">FILTRAR</button>
+                        </div>
                     </div>
-                    <div class="card-action center-align">
-                        <button class="btn verde branco-txt">FILTRAR</button>
-                    </div>
+
                     {!! Form::close() !!}
                 </div>
             </div>

@@ -35,6 +35,4 @@ final class Enuns extends Enum
     const redflag_status_negada = "Negada";
 
 
-
-
 }

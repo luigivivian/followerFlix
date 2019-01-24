@@ -1,12 +1,24 @@
-
 @extends('app')
 
 @section('content')
+
+    @inject('e', 'App\Enums\Enuns')
     <div id="conteudo">
         <div class="center-align">
             <h4 class="vermelho-txt">Red Flags</h4>
+            @if(session('msg'))
+                <div class="center-align verde-txt">
+                    <h5>{{ session('msg') }}</h5>
+                </div>
+            @endif
         </div>
-        <div class="row containerRedFlags col l12">
+       @if(session()->get('user')->tipoUsuario == \App\Enums\Enuns::admin)
+            <div class="center-align mt-1 mb-2">
+                <h4>Opções administrativas</h4>
+                <a class="btn btnBlock vermelho" href="{{route('redflag.moderar')}}">Moderar RedFlags</a>
+            </div>
+       @endif
+        <div class="row containerRedFlags col s12 l12">
             <div class="col s12 l4">
                 <div class="card branco">
                     <div class="card-content cinza-text">
@@ -36,10 +48,10 @@
             <div class="col s12 l4">
                 <div class="card branco">
                     <div class="card-content cinza-text">
-                     <div>
-                         <h5>Day - </h5>
-                         <h5>Razão - </h5>
-                     </div>
+                        <div>
+                            <h5>Day - </h5>
+                            <h5>Razão - </h5>
+                        </div>
                         <div class="center-align">
                             <button class="btn btn-small vermelho branco-txt btnFull">DISPUTE</button>
                         </div>
@@ -47,55 +59,57 @@
                 </div>
             </div>
         </div>
-        <div class="col s12 l10">
-            <div>
-                <div class="center-align">
-                    <div class="divider"></div>
-                    <h4 class="vermelho-txt">Create your redflag</h4>
-                    <div class="divider"></div>
-                </div>
 
-
+        <div class="col s12 l12">
+            <div class="center-align">
+                <div class="divider"></div>
+                <h4 class="vermelho-txt">Create your redflag</h4>
+                <div class="divider"></div>
+            </div>
+            <div class="row">
                 <div class="col s12 l12 center-align mt-3">
-                    <div class="row">
-                        <form class="formRedFlag col s12 l10 offset-l1">
+                    {{--Formulario--}}
+
+                    <div class="formRedFlag col s12 l10 offset-l1">
+                        {!! Form::open(['route' => ["redflag.enviar"],  'files' => true, 'method'=>'post']) !!}
+                        {{  csrf_field() }}
                             <div class="row">
-                                <div class="left-align ml-01">
-                                    <h5>Your Personal Information</h5>
+                                <div class="ml-01">
+                                    <h5 class="left-align">Your Personal Information</h5>
                                 </div>
                                 <div class="input-field col s6">
-                                    <input placeholder="Seu Nome" id="nome" name="nome" type="text" class="validate">
+                                    <input placeholder="Seu Nome" id="nome" name="nome_pessoal" type="text" class="validate" required>
                                     <label for="nome">Nome</label>
                                 </div>
                                 <div class="input-field col s6">
-                                    <input placeholder="Seu Email" id="email" name="email" type="text" class="validate">
+                                    <input placeholder="Seu Email" id="email" name="email_pessoal" type="email" class="validate" required>
                                     <label for="email">Email</label>
                                 </div>
                             </div>
 
                             <div class="row">
-                                <div class="left-align ml-01">
-                                    <h5>Informações usuario</h5>
-                                </div>
-                                <div class="divider"></div>
-                                <div class="input-field col s6">
-                                    <input placeholder="Nome do usuario" id="nome_denunciado" name="nome_denunciado" type="text" class="validate">
-                                    <label for="nome_denunciado">Nome</label>
+                                <div class="ml-01">
+                                    <h5 class="left-align">Informações Denuncia</h5>
                                 </div>
                                 <div class="input-field col s6">
-                                    <input placeholder="Email do usuario" id="email_denunciado" name="email_denunciado" type="text" class="validate">
-                                    <label for="email_denunciado">Email</label>
+                                    <input placeholder="Nome reportado" id="nome_reportado" name="nome_reportado" type="text" class="validate" required>
+                                    <label for="nome">Nome</label>
+                                </div>
+                                <div class="input-field col s6">
+                                    <input placeholder="Email reportado" id="email_reportado" name="email_reportado" name="email" type="text" class="validate" required>
+                                    <label for="email">Email</label>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="input-field col s12">
-                                    <textarea id="textarea1" class="materialize-textarea"></textarea>
+                                    <textarea id="textarea1" name="descricao" rows="8" style="resize: none;" required></textarea>
                                     <label for="textarea1">Descrição da denúncia</label>
                                 </div>
                             </div>
-                            <div class="row col l12">
-                                <div class="file-field input-field">
+
+                            <div class="row">
+                                <div class="file-field input-field col s12">
                                     <div class="btn">
                                         <span>ARQUIVO</span>
                                         <input type="file" name="arquivo">
@@ -105,16 +119,16 @@
                                     </div>
                                 </div>
                             </div>
-
-
-                            <div class="mb-2">
-                                <button class="btn vermelho branco-txt btnBlock-50">ENVIAR</button>
+                            <div>
+                                <button type="submit" class="btn btnBlock vermelho mt-1 mb-2">ENVIAR</button>
                             </div>
-                        </form>
+                        {!! Form::close() !!}
+                        {{--Fim formulario--}}
                     </div>
+
+
                 </div>
             </div>
-
         </div>
 
     </div>
@@ -123,7 +137,7 @@
 
     <script src="{{ asset('assets/materialize/js/materialize.js') }}"></script>
     <script>
-        $(document).ready(function(){
+        $(document).ready(function () {
             $('.modal').modal();
             $('select').formSelect();
         });

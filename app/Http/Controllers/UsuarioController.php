@@ -140,14 +140,11 @@ class UsuarioController extends Controller
         $usuario = Usuario::where('id', $id)->first();
         $data['avatar_img'] = $usuario->avatar_img;
         if($request->hasFile('avatar_img') && $request->file('avatar_img')->isValid()){
-
             $name = $usuario->id.kebab_case($usuario->nome);
-
             $extension = $request->avatar_img->extension();
             $nameFile = "{$name}.{$extension}";
             $data['avatar_img'] = $nameFile;
             $upload = $request->avatar_img->storeAs('public/uploads/avatar', $nameFile);
-
             if(!$upload){
                 $dados['error'] = "Falha ao atualizar imagem";
                 return view('usuarios.edit', $dados);

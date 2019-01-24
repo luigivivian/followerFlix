@@ -17,7 +17,7 @@
 
 @media only screen and (max-width : 992px) {
     #footer {
-        top: 120%;
+        margin-top: 90%;
     }
 }
 

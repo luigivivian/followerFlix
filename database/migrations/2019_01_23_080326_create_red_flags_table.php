@@ -10,7 +10,6 @@ class CreateRedFlagsTable extends Migration
     {
         Schema::create('red_flags', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('descricao');
             $table->date('data')->default(date("Y-m-d"));
             $table->string('arquivo')->nullable();
             $table->integer('id_usuario')->unsigned();
@@ -19,7 +18,7 @@ class CreateRedFlagsTable extends Migration
             $table->string('nome_pessoal');
             $table->string('email_reportado');
             $table->string('nome_reportado');
-            $table->string('descrição');
+            $table->string('descricao');
             $table->string('status')->default(Enuns::redflag_status_analise);
             $table->timestamps();
         });

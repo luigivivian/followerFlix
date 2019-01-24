@@ -15,6 +15,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/stylera.css') }}">
 
     <link rel="stylesheet" type="text/css" href="{{ asset('css/contratoCSS/contratoStyle.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/usuarioCSS/usuario.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/redFlags/redflag.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/responsividade/responsividade.css') }}">
 
@@ -32,7 +33,7 @@
 <body>
 
 <div id="app" style="margin-top: 0px; !important;" class="container-fluid">
-
+    @inject('e', 'App\Enums\Enuns')
     <div id="lateralMenu">
         <ul id="dropdown1" class="dropdown-content ">
             <li class="divider"></li>
@@ -78,10 +79,8 @@
             <div>
                 @yield('content')
             </div>
-        <footer>
-            <div id="footer" class="center-align">
+        <footer id="footer" class="center-align">
                 <h5>Rodapé</h5>
-            </div>
         </footer>
     </div>
 

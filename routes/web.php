@@ -43,6 +43,9 @@ Route::middleware(['auth'])->group(function () {
 
     Route::group(['prefix'=>'redflag', 'where'=>['id'=>'[0-9]+']], function() {
         Route::get('{id}/visualizar',     ['as'=>'redflag.visualizar',      'uses'=> 'RedFlagController@index'] );
+        Route::get('/moderar',     ['as'=>'redflag.moderar',      'uses'=> 'RedFlagController@moderar'] );
+        Route::get('{id}/analisar',     ['as'=>'redflag.analisar',      'uses'=> 'RedFlagController@analisar'] );
+        Route::post('/enviar',     ['as'=>'redflag.enviar',      'uses'=> 'RedFlagController@salvar'] );
     });
 
 });
