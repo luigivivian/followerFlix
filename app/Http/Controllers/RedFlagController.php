@@ -15,6 +15,22 @@ class RedFlagController extends Controller
         return view('redflags.index', $dados);
     }
 
+    public function veraprovadas(){
+        if(session()->get('user')->tipoUsuario != Enuns::admin){
+            return redirect()->route('redflag.visualizar');
+        }else if(session()->get('user')->tipoUsuario == Enuns::admin){
+            $dados['redflags'] = RedFlag::where('status', '=', Enuns::redflag_status_aprovada)->get();
+            $dados['aprovadasPage'] = true;
+            return view('redflags.list', $dados);
+        }
+    }
+    public function disputes(){
+        $r = new RedFlag();
+        $query = $r->getDispute();
+        $dados['disputes'] = $query;
+        return view('redflags.dispute_list', $dados);
+    }
+
     public function salvar(Request $request){
         $regras = [
             'nome_pessoal' => 'required|max:255',
@@ -55,6 +71,7 @@ class RedFlagController extends Controller
             return redirect()->route('redflag.visualizar');
         }else if(session()->get('user')->tipoUsuario == Enuns::admin){
             $dados['redflags'] = RedFlag::where('status', '=', 'Em analise')->get();
+            $dados['aprovadasPage'] = false;
             return view('redflags.list', $dados);
         }
     }
@@ -75,21 +92,62 @@ class RedFlagController extends Controller
             $msg = "Red flag aprovada";
             return redirect()->route('redflag.visualizar', $idUser)->with('msg', $msg);
         }else{
-
+            $msg = "Erro ao aprovar Red Flag";
+            return redirect()->route('redflag.visualizar', $idUser)->with('msg', $msg);
         }
     }
 
     public function negar(Request $request){
         $r = new RedFlag();
         $query = $r->negar($request->id);
+        $idUser = session()->get('user')-id;
         if($query){
-
+            $msg = "Red flag Negada";
+            return redirect()->route('redflag.visualizar', $idUser)->with('msg', $msg);
         }else{
-
+            $msg = "Erro ao Negar Red Flag";
+            return redirect()->route('redflag.visualizar', $idUser)->with('msg', $msg);
         }
     }
 
-    public function formDispute(){
+    public function formDispute(Request $request){
+        $idRedFlag = $request->id;
+        $dados['redflag'] = RedFlag::where('id', '=', $idRedFlag)->get();
+        return view('redflags.dispute', $dados);
+    }
 
+    public function formDispute_send(Request $request){
+        $data = $request->all();
+        $idRedFlag = $request->idRedflag;
+        $data['id_redflag'] = $idRedFlag;
+        unset($data['_token']);
+
+        $regras = [
+            'descricao' => 'required|max:255',
+        ];
+        $msgError = [
+            'required' => 'O campo :attribute deve ser preenchido.'
+        ];
+
+        $this->validate($request, $regras, $msgError);
+        $user = session()->get('user')->id;
+
+        if($request->hasFile('arquivo') && $request->file('arquivo')->isValid()){
+            $name = sha1(time()) . "_$idRedFlag";
+            $extension = $request->arquivo->extension();
+            $nameFile = "$name.$extension";
+            $data['arquivo'] = $nameFile;
+            $upload = $request->arquivo->storeAs('public/uploads/dispute', $nameFile);
+            if(!$upload){
+                $msg = "Falha ao enviar iamgem";
+                return redirect()->route('redflag.visualizar',  session()->get('user')->id)->with('msg', $msg);
+            }
+        }
+        $r = new RedFlag();
+        $query = $r->saveDispute($data);
+        if($query){
+            $msg = "Dispute enviada com sucesso !";
+            return redirect()->route('redflag.visualizar', session()->get('user')->id)->with('msg', $msg);
+        }
     }
 }

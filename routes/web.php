@@ -27,7 +27,6 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/comprarativacao/{id}', 'AtivacaoController@comprarAtivacao')->name('comprarativacao');
     Route::get('/confirmarativacao', 'AtivacaoController@confirmarAtivacao')->name('confirmarativacao');
 
-
     Route::group(['prefix'=>'user', 'where'=>['id'=>'[0-9]+']], function() {
         Route::get('{id}/edit',     ['as'=>'user.edit',      'uses'=> 'UsuarioController@myProfile'] );
         Route::get('/buscar',     ['as'=>'user.buscar',      'uses'=> 'UsuarioController@buscarUsuario'] );
@@ -41,14 +40,20 @@ Route::middleware(['auth'])->group(function () {
         Route::get('{id}/visualizar',     ['as'=>'contrato.visualizar',      'uses'=> 'ServicoController@visualizar'] );
     });
 
-    Route::group(['prefix'=>'redflag', 'where'=>['id'=>'[0-9]+']], function() {
-        Route::get('{id}/visualizar',     ['as'=>'redflag.visualizar',      'uses'=> 'RedFlagController@index'] );
-        Route::get('/moderar',     ['as'=>'redflag.moderar',      'uses'=> 'RedFlagController@moderar'] );
-        Route::get('{id}/analisar',     ['as'=>'redflag.analisar',      'uses'=> 'RedFlagController@analisar'] );
-        Route::post('/enviar',     ['as'=>'redflag.enviar',      'uses'=> 'RedFlagController@salvar'] );
-        Route::get('{id}/aprovar',     ['as'=>'redflag.aprovar',      'uses'=> 'RedFlagController@aprovar'] );
-        Route::get('{id}/negar',     ['as'=>'redflag.negar',      'uses'=> 'RedFlagController@negar'] );
-        Route::get('{id}/dispute',     ['as'=>'redflag.dispute',      'uses'=> 'RedFlagController@formDispute'] );
+    Route::group(['prefix'=>'redflag', 'where'=>['id'=>'[0-9]+']], function(){
+        Route::get('{id}/visualizar',     ['as'=>'redflag.visualizar',      'uses'=> 'RedFlagController@index']);
+
+        Route::get('/veraprovadas',     ['as'=>'redflag.veraprovadas',      'uses'=> 'RedFlagController@veraprovadas']);
+        Route::get('/moderar',     ['as'=>'redflag.moderar',      'uses'=> 'RedFlagController@moderar']);
+        Route::get('{id}/analisar',     ['as'=>'redflag.analisar',      'uses'=> 'RedFlagController@analisar']);
+        Route::get('/disputes',     ['as'=>'redflag.disputes',      'uses'=> 'RedFlagController@disputes']);
+
+
+        Route::post('/enviar',     ['as'=>'redflag.enviar',      'uses'=> 'RedFlagController@salvar']);
+        Route::get('{id}/aprovar',     ['as'=>'redflag.aprovar',      'uses'=> 'RedFlagController@aprovar']);
+        Route::get('{id}/negar',     ['as'=>'redflag.negar',      'uses'=> 'RedFlagController@negar']);
+        Route::get('{id}/dispute',     ['as'=>'redflag.dispute',      'uses'=> 'RedFlagController@formDispute']);
+        Route::post('{idRedflag}/senddispute',     ['as'=>'redflag.sendDispute',      'uses'=> 'RedFlagController@formDispute_send']);
     });
 
 });

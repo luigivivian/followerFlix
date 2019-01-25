@@ -27,14 +27,21 @@
                 </div>
             @endif
             <div class="divider"></div>
-            <div class="row mt-1 mb-1">
-                <div class="col s6">
-                    <a class="btn btnBlock vermelho" href="{{route('redflag.negar', $id)}}">NEGAR</a>
+            @if($r->status == "Em analise")
+                <div class="row mt-1 mb-1">
+                    <div class="col s6">
+                        <a class="btn btnBlock vermelho" href="{{route('redflag.negar', $id)}}">NEGAR</a>
+                    </div>
+                    <div class="col l6 s6">
+                        <a class="btn btnBlock verde" href="{{route('redflag.aprovar', $id)}}">APROVAR</a>
+                    </div>
                 </div>
-                <div class="col l6 s6">
-                    <a class="btn btnBlock verde" href="{{route('redflag.aprovar', $id)}}">APROVAR</a>
+            @else
+                <div class="vermelho-txt center-align">
+                    <h4>RED FLAG JÁ MODERADA</h4>
+                    <p>(Opções de moração indisponiveis)</p>
                 </div>
-            </div>
+            @endif
         </div>
     </div>
 

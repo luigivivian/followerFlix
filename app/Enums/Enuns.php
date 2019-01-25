@@ -34,5 +34,9 @@ final class Enuns extends Enum
     const redflag_status_aprovada = "Aprovada";
     const redflag_status_negada = "Negada";
 
+    //disputes
+    const dispute_status_analise = "Em analise";
+    const dispute_status_aprovada = "Aprovada";
+    const dispute_status_negada = "Negada";
 
 }

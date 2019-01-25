@@ -9,10 +9,9 @@
             @if(session('msg'))
                 <div class="center-align verde-txt">
                     <h5>{{ session('msg') }}</h5>
-
                 </div>
             @endif
-            <?=var_dump($redflags);?>
+
         </div>
        @if(session()->get('user')->tipoUsuario == \App\Enums\Enuns::admin)
             <div class="center-align mt-1 mb-2">

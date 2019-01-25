@@ -4,9 +4,22 @@
     <div id="conteudo" class="container containerTable">
         <div class="center-align">
             <h4 class="vermelho-txt">Red Flags</h4>
+            @if($aprovadasPage != true)
+                <div class="center-align">
+                    <a class="btn btnBlock verde" href="{{route('redflag.veraprovadas')}}">REDFLAGS APROVADAS</a>
+                </div>
+                <div class="center-align">
+                    <a class="btn btnBlock azulEscuro" href="{{route('redflag.disputes')}}">VISUALIZAR DISPUTES</a>
+                </div>
+            @endif
+            @if($aprovadasPage == true)
+                <div class="center-align">
+                    <h4 class="verde-txt">RedFlags Aprovadas</h4>
+                </div>
+            @endif
         </div>
 
-
+        @if(count($redflags) > 0)
         <table class="highlight responsive-table">
             <thead>
             <tr>
@@ -15,9 +28,7 @@
                 <th class="center-align">Opções</th>
             </tr>
             </thead>
-
             <tbody>
-
             @foreach ($redflags as $r)
                 <tr>
                     <td>{{$r->nome_pessoal}}</td>
@@ -29,6 +40,15 @@
             @endforeach
             </tbody>
         </table>
+
+
+        @else
+            <div class="divider"></div>
+            <div class="center-align">
+                <h4>Sem RedFlags para serem moderadas !</h4>
+            </div>
+            <div class="divider"></div>
+        @endif
 
 
     </div>
