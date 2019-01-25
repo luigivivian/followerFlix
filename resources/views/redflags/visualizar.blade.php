@@ -6,6 +6,7 @@
             <h4 class="vermelho-txt">Informações</h4>
         </div>
         <?php  $r = $redflag[0];?>
+        <?php var_dump($r);?>
         <div class="boxRedFlag">
                 <h4 class="center-align">Usuario Reportado</h4>
                 <h5>Nome: {{$r->nome_reportado}}</h5>
@@ -30,10 +31,10 @@
             @if($r->status == "Em analise")
                 <div class="row mt-1 mb-1">
                     <div class="col s6">
-                        <a class="btn btnBlock vermelho" href="{{route('redflag.negar', $id)}}">NEGAR</a>
+                        <a class="btn btnBlock vermelho" href="{{route('redflag.negar', ['idredflag'=> $r->id, 'iduser'=>$r->id_usuario])}}">NEGAR</a>
                     </div>
                     <div class="col l6 s6">
-                        <a class="btn btnBlock verde" href="{{route('redflag.aprovar', $id)}}">APROVAR</a>
+                        <a class="btn btnBlock verde" href="{{route('redflag.aprovar', ['idredflag'=> $r->id, 'iduser'=>$r->id_usuario])}}">APROVAR</a>
                     </div>
                 </div>
             @else

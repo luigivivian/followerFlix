@@ -5,27 +5,27 @@
         <div class="center-align">
             <h4 class="vermelho-txt">Informações</h4>
         </div>
-        <?php $d = $disputes;?>
+        <?php $d = $disputes[0];?>
         <?php var_dump($d);?>
         <div class="boxRedFlag">
             <h4 class="center-align">Usuario Reportado</h4>
             <h5>Nome: {{$d->nome_reportado}}</h5>
             <h5>Email: {{$d->email_reportado}}</h5>
             <h5>Descrição:</h5>
-            <p>{{$d->descricao}}</p>
+            <p>{{$d->descricao_redflag}}</p>
             <div class="divider"></div>
-            @if($d->arquivo == null)
+            @if($d->arquivo_redflag == null)
                 <div>
                     <h4 class="center-align vermelho-txt">ARQUIVO NÃO DISPONÍVEL</h4>
                 </div>
             @else
                 <div class="center-align" >
                     <h5>Arquivo:</h5>
-                    <a target="_blank" href="{{ asset('storage/uploads/redflag/'.$d->arquivo) }}" >CLIQUE PARA VISUALIZAR</a>
+                    <a target="_blank" href="{{ asset('storage/uploads/redflag/'.$d->arquivo_redflag) }}" >CLIQUE PARA VISUALIZAR</a>
                 </div>
             @endif
             <div class="divider"></div>
-            @if($d->status == "Em analise")
+            @if($d->status_redflag == "Em analise")
                 <div class="row mt-1 mb-1">
                     <div class="col s6">
                         <a class="btn btnBlock vermelho" href="{{route('redflag.negar', $id)}}">NEGAR</a>
@@ -50,20 +50,24 @@
                 </div>
 
                 <div class="center-align" >
-                    <h5>Arquivo:</h5>
-                    <a target="_blank" href="{{ asset('storage/uploads/dispute/'.$d->arquivoDispute) }}" >CLIQUE PARA VISUALIZAR</a>
+                    @if($d->arquivo_dispute != null)
+                        <h5>Arquivo:</h5>
+                        <a target="_blank" href="{{ asset('storage/uploads/dispute/'.$d->arquivo_dispute) }}" >CLIQUE PARA VISUALIZAR</a>
+                    @else
+                        <h5 class="vermelho-txt">ARQUIVO NÃO DISPONÍVEL</h5>
+                    @endif
                 </div>
 
                 <div class="center-align" >
                     <h5>Descrição</h5>
-                    <p>{{$d->descricaoDispute}}</p>
+                    <p>{{$d->descricao_dispute}}</p>
                 </div>
                 <div class="row mb-2">
                     <div class="col s12 l6">
-                        <a class="btn vermelho btnBlock mb-1" href="{{route('redflag.dispute.negar', ['id'=> $d->id, 'idredflag'=>$d->id_redflag])}}">NEGAR</a>
+                        <a class="btn vermelho btnBlock mb-1" href="{{route('redflag.dispute.negar', ['idredflag'=> $d->id_redflag, 'iddispute'=>$d->id_dispute])}}">NEGAR</a>
                     </div>
                     <div class="col s12 l6">
-                        <a class="btn verde btnBlock" href="{{route('redflag.dispute.aprovar', ['id'=> $d->id, 'idredflag'=>$d->id_redflag])}}">APROVAR</a>
+                        <a class="btn verde btnBlock" href="{{route('redflag.dispute.aprovar', ['idredflag'=> $d->id_redflag, 'iddispute'=>$d->id_dispute])}}">APROVAR</a>
                     </div>
                 </div>
             </div>

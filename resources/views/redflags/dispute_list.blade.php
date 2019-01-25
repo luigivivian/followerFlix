@@ -8,11 +8,12 @@
             <h4 class="vermelho-txt">DISPUTES LIST</h4>
             @if(isset($msg))
                 <div class="verde-txt">
-                    {{$msg}}
+                    <h5>{{$msg}}</h5>
                 </div>
             @endif
         </div>
         @if(count($disputes) > 0)
+            <?php var_dump($disputes);?>
             <table class="highlight responsive-table">
                 <thead>
                 <tr>
@@ -24,10 +25,10 @@
                 <tbody>
                 @foreach ($disputes as $d)
                     <tr>
-                        <td>{{$d->id}}</td>
+                        <td>{{$d->id_dispute}}</td>
                         <td>{{$d->nome_pessoal}}</td>
                         <td class="center-align">
-                            <a class="btn btn-small azul branco-txt" href="{{route('redflag.dispute.ver', $d->id)}}"><i class="material-icons">zoom_in</i></a>
+                            <a class="btn btn-small azul branco-txt" href="{{route('redflag.dispute.ver', ['iddispute'=>$d->id_dispute])}}"><i class="material-icons">zoom_in</i></a>
                         </td>
                     </tr>
                 @endforeach

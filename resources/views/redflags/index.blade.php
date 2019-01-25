@@ -79,11 +79,11 @@
                                     <h5 class="left-align">Your Personal Information</h5>
                                 </div>
                                 <div class="input-field col s6">
-                                    <input placeholder="Seu Nome" id="nome" name="nome_pessoal" type="text" class="validate" required>
+                                    <input placeholder="Seu Nome" id="nome" readonly value="{{session()->get('user')->nome}}" name="nome_pessoal" type="text" class="validate" required>
                                     <label for="nome">Nome</label>
                                 </div>
                                 <div class="input-field col s6">
-                                    <input placeholder="Seu Email" id="email" name="email_pessoal" type="email" class="validate" required>
+                                    <input placeholder="Seu Email" id="email" readonly value="{{session()->get('user')->email}}" name="email_pessoal" type="email" class="validate" required>
                                     <label for="email">Email</label>
                                 </div>
                             </div>

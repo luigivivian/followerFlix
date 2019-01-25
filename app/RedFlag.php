@@ -19,10 +19,31 @@ class RedFlag extends Model
         return $query;
     }
 
-    public function negarRedFlag($id){
+    public function negarRedFlag($id, $idUser){
         $query = DB::table('red_flags')
             ->where('id', $id)
-            ->update(array('status' => Enuns::redflag_status_aprovada));
+            ->update(array('status' => Enuns::redflag_status_negada));
+        //find usuario dono da redflag id passado por parametro
+        $u = new Usuario();
+        $user = $u->getUser($idUser);
+//        $data['id_usuario'] = $user->id;
+//        $data['email_pessoal'] = $user->email_pessoal;
+//        $data['nome_pessoal'] = $user->nome_pessoal;
+//        $data['email_reportado'] = $user->email_reportado;
+//        $data['nome_reportado'] = $user->nome_reportado;
+//        $data['email_pessoal'] = $user->email_pessoal;
+//        $data['email_pessoal'] = $user->email_pessoal;
+        DB::table('users')->insert(
+
+        );
+        return $query;
+    }
+
+    public function getRedFlagOwner($idRedFlag){
+        $query = DB::table('usuarios as u')
+            ->select('*')
+            ->where('r.id', $idRedFlag)
+            ->join('red_flags as r', 'r.id_usuario', '=', 'u.id')->where('r.id', $idRedFlag)->get();
         return $query;
     }
 
@@ -33,12 +54,20 @@ class RedFlag extends Model
 
     public function getDispute($id = null){
         if($id){
-            $query = DB::table('dispute as d')->select('d.*', 'd.arquivo as arquivoDispute', 'd.descricao as descricaoDispute', 'r.*')->where('d.status', Enuns::dispute_status_analise)
-                ->join('red_flags as r', 'r.id', '=', 'd.id_redflag')->where('d.id', $id)->first();
+            $query = DB::table('dispute as d')
+                        ->select('d.id as id_dispute', 'd.data as data_dispute', 'd.descricao as descricao_dispute',
+                            'd.status as status_dispute', 'd.arquivo as arquivo_dispute', 'r.id as id_redflag', 'r.data as data_redflag',
+                            'r.id_usuario as id_usuario_redflag', 'r.email_pessoal', 'r.nome_pessoal', 'r.email_reportado', 'r.nome_reportado',
+                            'r.descricao as descricao_redflag', 'r.status as status_redflag', 'r.arquivo as arquivo_redflag')->where('d.status', Enuns::dispute_status_analise)
+                        ->join('red_flags as r', 'r.id', '=', 'd.id_redflag')->where('d.id', $id)->get();
             return $query;
         }else{
-            $query = DB::table('dispute as d')->select('d.*', 'd.arquivo as arquivoDispute', 'd.descricao as descricaoDispute', 'r.*')->where('d.status', Enuns::dispute_status_analise)
-                ->join('red_flags as r', 'r.id', '=', 'd.id_redflag')->get();
+            $query = DB::table('dispute as d')
+                        ->select('d.id as id_dispute', 'd.data as data_dispute', 'd.descricao as descricao_dispute',
+                            'd.status as status_dispute', 'd.arquivo as arquivo_dispute', 'r.id as id_redflag', 'r.data as data_redflag',
+                            'r.id_usuario as id_usuario_redflag', 'r.email_pessoal', 'r.nome_pessoal', 'r.email_reportado', 'r.nome_reportado',
+                            'r.descricao as descricao_redflag', 'r.status as status_redflag', 'r.arquivo as arquivo_redflag')->where('d.status', Enuns::dispute_status_analise)
+                        ->join('red_flags as r', 'r.id', '=', 'd.id_redflag')->get();
             return $query;
         }
     }

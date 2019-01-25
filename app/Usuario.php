@@ -65,4 +65,9 @@ class Usuario extends Authenticatable
         return $user;
     }
 
+    public function getUser($id){
+        $user =  DB::table('usuarios')->where('id', '=', $id)->first();
+        return $user;
+    }
+
 }

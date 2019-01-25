@@ -31,6 +31,7 @@ class RedFlagController extends Controller
         $dados['disputes'] = $query;
         return view('redflags.dispute_list', $dados);
     }
+
     public function disputeVer(Request $request){
         $id = $request->id;
         $r = new RedFlag();
@@ -38,25 +39,30 @@ class RedFlagController extends Controller
         $dados['disputes'] = $query;
         return view('redflags.dispute_ver', $dados);
     }
+
     public function aprovarDispute(Request $request){
-        $id = $request->id;
+        $idDispute = $request->iddispute;
         $idRedFlag = $request->idredflag;
         $r = new RedFlag();
-        $query = $r->aprovarDispute($id, $idRedFlag);
+        $query = $r->aprovarDispute($idDispute, $idRedFlag);
         if($query){
-            $msg = "Dispute aprovada !";
-            return redirect()->route('redflag.disputes', $msg);
+            $query = $r->getDispute();
+            $dados['disputes'] = $query;
+            $dados['msg'] = "Dispute aprovada !";
+            return view('redflags.dispute_list', $dados);
         }
     }
 
     public function negarDispute(Request $request){
-        $id = $request->id;
+        $idDispute = $request->iddispute;
         $idRedFlag = $request->idredflag;
         $r = new RedFlag();
-        $query = $r->negarDispute($id);
+        $query = $r->negarDispute($idDispute, $idRedFlag);
         if($query){
-            $msg = "Dispute negada !";
-            return redirect()->route('redflag.disputes', $msg);
+            $query = $r->getDispute();
+            $dados['disputes'] = $query;
+            $dados['msg'] = "Dispute negada !";
+            return view('redflags.dispute_list', $dados);
         }
     }
 
@@ -109,7 +115,8 @@ class RedFlagController extends Controller
         if(session()->get('user')->tipoUsuario != Enuns::admin)
             return redirect()->route('dashboard');
         $id = $request->id;
-        $dados['redflag'] = RedFlag::where('id', '=',$id )->get();
+        $r = new RedFlag();
+        $dados['redflag'] = $r->getRedFlagOwner($id);
         $dados['id'] = $id;
         return view('redflags.visualizar', $dados);
     }
@@ -128,8 +135,8 @@ class RedFlagController extends Controller
 
     public function negar(Request $request){
         $r = new RedFlag();
-        $query = $r->negarRedFlag($request->id);
-        $idUser = session()->get('user')-id;
+        $idUser = session()->get('user')->iduser;
+        $query = $r->negarRedFlag($request->id, $idUser);
         if($query){
             $msg = "Red flag Negada";
             return redirect()->route('redflag.visualizar', $idUser)->with('msg', $msg);
