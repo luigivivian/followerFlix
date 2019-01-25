@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Enums\Enuns;
 use App\RedFlag;
 use App\Usuario;
+use GuzzleHttp\Exception\RequestException;
 use Illuminate\Http\Request;
 
 class RedFlagController extends Controller
@@ -29,6 +30,34 @@ class RedFlagController extends Controller
         $query = $r->getDispute();
         $dados['disputes'] = $query;
         return view('redflags.dispute_list', $dados);
+    }
+    public function disputeVer(Request $request){
+        $id = $request->id;
+        $r = new RedFlag();
+        $query = $r->getDispute($id);
+        $dados['disputes'] = $query;
+        return view('redflags.dispute_ver', $dados);
+    }
+    public function aprovarDispute(Request $request){
+        $id = $request->id;
+        $idRedFlag = $request->idredflag;
+        $r = new RedFlag();
+        $query = $r->aprovarDispute($id, $idRedFlag);
+        if($query){
+            $msg = "Dispute aprovada !";
+            return redirect()->route('redflag.disputes', $msg);
+        }
+    }
+
+    public function negarDispute(Request $request){
+        $id = $request->id;
+        $idRedFlag = $request->idredflag;
+        $r = new RedFlag();
+        $query = $r->negarDispute($id);
+        if($query){
+            $msg = "Dispute negada !";
+            return redirect()->route('redflag.disputes', $msg);
+        }
     }
 
     public function salvar(Request $request){
@@ -87,7 +116,7 @@ class RedFlagController extends Controller
     public function aprovar(Request $request){
         $r = new RedFlag();
         $idUser = session()->get('user')->id;
-        $query = $r->aprovar($request->id);
+        $query = $r->aprovarRedFlag($request->id);
         if($query){
             $msg = "Red flag aprovada";
             return redirect()->route('redflag.visualizar', $idUser)->with('msg', $msg);
@@ -99,7 +128,7 @@ class RedFlagController extends Controller
 
     public function negar(Request $request){
         $r = new RedFlag();
-        $query = $r->negar($request->id);
+        $query = $r->negarRedFlag($request->id);
         $idUser = session()->get('user')-id;
         if($query){
             $msg = "Red flag Negada";

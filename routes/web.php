@@ -46,8 +46,11 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/veraprovadas',     ['as'=>'redflag.veraprovadas',      'uses'=> 'RedFlagController@veraprovadas']);
         Route::get('/moderar',     ['as'=>'redflag.moderar',      'uses'=> 'RedFlagController@moderar']);
         Route::get('{id}/analisar',     ['as'=>'redflag.analisar',      'uses'=> 'RedFlagController@analisar']);
-        Route::get('/disputes',     ['as'=>'redflag.disputes',      'uses'=> 'RedFlagController@disputes']);
 
+        Route::get('/disputes',     ['as'=>'redflag.disputes',      'uses'=> 'RedFlagController@disputes']);
+        Route::get('{id}/dispute/ver',     ['as'=>'redflag.dispute.ver',      'uses'=> 'RedFlagController@disputeVer']);
+        Route::get('{id}/dispute/aprovar/{idredflag}',     ['as'=>'redflag.dispute.aprovar',      'uses'=> 'RedFlagController@aprovarDispute']);
+        Route::get('{id}/dispute/negar/{idredflag}',     ['as'=>'redflag.dispute.negar',      'uses'=> 'RedFlagController@negarDispute']);
 
         Route::post('/enviar',     ['as'=>'redflag.enviar',      'uses'=> 'RedFlagController@salvar']);
         Route::get('{id}/aprovar',     ['as'=>'redflag.aprovar',      'uses'=> 'RedFlagController@aprovar']);

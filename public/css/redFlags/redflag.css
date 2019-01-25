@@ -28,3 +28,11 @@
 .containerRed{
     width: 90%;
 }
+.divisoria{
+    border-bottom-style: solid;
+    border-bottom-color: #ff5252;
+    border-bottom-width: 4px;
+}
+.disputeMod{
+
+}

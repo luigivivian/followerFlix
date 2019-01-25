@@ -6,7 +6,11 @@
     <div id="conteudo" class="container containerTable">
         <div class="center-align">
             <h4 class="vermelho-txt">DISPUTES LIST</h4>
-
+            @if(isset($msg))
+                <div class="verde-txt">
+                    {{$msg}}
+                </div>
+            @endif
         </div>
         @if(count($disputes) > 0)
             <table class="highlight responsive-table">
@@ -21,15 +25,14 @@
                 @foreach ($disputes as $d)
                     <tr>
                         <td>{{$d->id}}</td>
-                        <td>{{$d->id}}</td>
+                        <td>{{$d->nome_pessoal}}</td>
                         <td class="center-align">
-                            <a class="btn btn-small azul branco-txt" href="{{route('redflag.analisar', $d->id)}}"><i class="material-icons">zoom_in</i></a>
+                            <a class="btn btn-small azul branco-txt" href="{{route('redflag.dispute.ver', $d->id)}}"><i class="material-icons">zoom_in</i></a>
                         </td>
                     </tr>
                 @endforeach
                 </tbody>
             </table>
-
 
         @else
             <div class="divider"></div>
@@ -38,7 +41,6 @@
             </div>
             <div class="divider"></div>
         @endif
-
 
     </div>
 

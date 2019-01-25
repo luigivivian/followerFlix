@@ -8,7 +8,7 @@
                 <div class="center-align">
                     <a class="btn btnBlock verde" href="{{route('redflag.veraprovadas')}}">REDFLAGS APROVADAS</a>
                 </div>
-                <div class="center-align">
+                <div class="center-align mt-1">
                     <a class="btn btnBlock azulEscuro" href="{{route('redflag.disputes')}}">VISUALIZAR DISPUTES</a>
                 </div>
             @endif
