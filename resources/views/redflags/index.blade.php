@@ -9,8 +9,10 @@
             @if(session('msg'))
                 <div class="center-align verde-txt">
                     <h5>{{ session('msg') }}</h5>
+
                 </div>
             @endif
+            <?=var_dump($redflags);?>
         </div>
        @if(session()->get('user')->tipoUsuario == \App\Enums\Enuns::admin)
             <div class="center-align mt-1 mb-2">
@@ -19,45 +21,45 @@
             </div>
        @endif
         <div class="row containerRedFlags col s12 l12">
-            <div class="col s12 l4">
-                <div class="card branco">
-                    <div class="card-content cinza-text">
-                        <div>
-                            <h5>Day - </h5>
-                            <h5>Razão - </h5>
-                        </div>
-                        <div class="center-align">
-                            <button class="btn btn-small vermelho branco-txt btnFull">DISPUTE</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col s12 l4">
-                <div class="card branco">
-                    <div class="card-content cinza-text">
-                        <div>
-                            <h5>Day - </h5>
-                            <h5>Razão - </h5>
-                        </div>
-                        <div class="center-align">
-                            <button class="btn btn-small vermelho branco-txt btnFull">DISPUTE</button>
+            <?php $cont = 3;?>
+            @foreach($redflags as $r)
+                <?php $cont--; ?>
+                <div class="col s12 l4">
+                    <div class="card branco">
+                        <div class="card-content cinza-text">
+                            <div>
+                                <h5>Day - {{$r->data}}</h5>
+                                <h5>Autor - {{$r->nome_pessoal}}</h5>
+                            </div>
+                            <div class="center-align">
+                                <a href="{{route('redflag.dispute', $r->id)}}" class="btn btn-small vermelho branco-txt btnFull">DISPUTE</a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col s12 l4">
-                <div class="card branco">
-                    <div class="card-content cinza-text">
-                        <div>
-                            <h5>Day - </h5>
-                            <h5>Razão - </h5>
-                        </div>
-                        <div class="center-align">
-                            <button class="btn btn-small vermelho branco-txt btnFull">DISPUTE</button>
+            @endforeach
+            <?php
+                for($i = $cont; $cont > 0; $cont--){
+            ?>
+                <div class="col s12 l4">
+                    <div class="card branco">
+                        <div class="card-content cinza-text">
+                            <div>
+                                <h5>Day - </h5>
+                                <h5>Autor - </h5>
+                            </div>
+                            <div class="center-align">
+                                <button class="btn btn-small vermelho branco-txt btnFull">DISPUTE</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            <?php
+                }
+            ?>
+
+
+
         </div>
 
         <div class="col s12 l12">

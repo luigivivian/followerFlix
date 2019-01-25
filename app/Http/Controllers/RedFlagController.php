@@ -11,8 +11,7 @@ class RedFlagController extends Controller
 {
     //
     public function index(){
-
-        $dados['redflags'] = 'null';
+        $dados['redflags'] = RedFlag::where('email_reportado', '=', 'luigivivian@hotmail.com')->where('status', '=', Enuns::redflag_status_aprovada)->get();
         return view('redflags.index', $dados);
     }
 
@@ -59,10 +58,38 @@ class RedFlagController extends Controller
             return view('redflags.list', $dados);
         }
     }
-
+        //abrir redfalg moderador
     public function analisar(Request $request){
+        if(session()->get('user')->tipoUsuario != Enuns::admin)
+            return redirect()->route('dashboard');
         $id = $request->id;
         $dados['redflag'] = RedFlag::where('id', '=',$id )->get();
+        $dados['id'] = $id;
         return view('redflags.visualizar', $dados);
+    }
+    public function aprovar(Request $request){
+        $r = new RedFlag();
+        $idUser = session()->get('user')->id;
+        $query = $r->aprovar($request->id);
+        if($query){
+            $msg = "Red flag aprovada";
+            return redirect()->route('redflag.visualizar', $idUser)->with('msg', $msg);
+        }else{
+
+        }
+    }
+
+    public function negar(Request $request){
+        $r = new RedFlag();
+        $query = $r->negar($request->id);
+        if($query){
+
+        }else{
+
+        }
+    }
+
+    public function formDispute(){
+
     }
 }

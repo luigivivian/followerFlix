@@ -17,7 +17,7 @@
             </thead>
 
             <tbody>
-            <?=var_dump($redflags)?>
+
             @foreach ($redflags as $r)
                 <tr>
                     <td>{{$r->nome_pessoal}}</td>

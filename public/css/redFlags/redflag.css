@@ -14,3 +14,17 @@
 .containerTable{
     width: 80%;
 }
+
+.boxRedFlag{
+    padding: 1%;
+    border-color: rgba(174,174,174,0.84);
+    border-style: solid;
+    border-width: 1px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+}
+
+.containerRed{
+    width: 90%;
+}

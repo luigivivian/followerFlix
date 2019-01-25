@@ -46,6 +46,9 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/moderar',     ['as'=>'redflag.moderar',      'uses'=> 'RedFlagController@moderar'] );
         Route::get('{id}/analisar',     ['as'=>'redflag.analisar',      'uses'=> 'RedFlagController@analisar'] );
         Route::post('/enviar',     ['as'=>'redflag.enviar',      'uses'=> 'RedFlagController@salvar'] );
+        Route::get('{id}/aprovar',     ['as'=>'redflag.aprovar',      'uses'=> 'RedFlagController@aprovar'] );
+        Route::get('{id}/negar',     ['as'=>'redflag.negar',      'uses'=> 'RedFlagController@negar'] );
+        Route::get('{id}/dispute',     ['as'=>'redflag.dispute',      'uses'=> 'RedFlagController@formDispute'] );
     });
 
 });
