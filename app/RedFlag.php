@@ -26,16 +26,14 @@ class RedFlag extends Model
         //find usuario dono da redflag id passado por parametro
         $u = new Usuario();
         $user = $u->getUser($idUser);
-//        $data['id_usuario'] = $user->id;
-//        $data['email_pessoal'] = $user->email_pessoal;
-//        $data['nome_pessoal'] = $user->nome_pessoal;
-//        $data['email_reportado'] = $user->email_reportado;
-//        $data['nome_reportado'] = $user->nome_reportado;
-//        $data['email_pessoal'] = $user->email_pessoal;
-//        $data['email_pessoal'] = $user->email_pessoal;
-        DB::table('users')->insert(
-
-        );
+        $data['id_usuario'] = $idUser;
+        $data['email_pessoal'] = $user->email;
+        $data['nome_pessoal'] = $user->nome;
+        $data['email_reportado'] = $user->email;
+        $data['nome_reportado'] = $user->nome;
+        $data['descricao'] = "Red flag negada";
+        $data['status'] = Enuns::redflag_status_aprovada;
+        DB::table('red_flags')->insert($data);
         return $query;
     }
 

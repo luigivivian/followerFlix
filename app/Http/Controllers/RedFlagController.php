@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Enums\Enuns;
 use App\RedFlag;
 use App\Usuario;
-use GuzzleHttp\Exception\RequestException;
 use Illuminate\Http\Request;
 
 class RedFlagController extends Controller
@@ -26,6 +25,10 @@ class RedFlagController extends Controller
         }
     }
     public function disputes(){
+        //validar user
+        if(session()->get('user')->tipoUsuario != Enuns::admin){
+            return redirect()->route('dashboard');
+        }
         $r = new RedFlag();
         $query = $r->getDispute();
         $dados['disputes'] = $query;
@@ -33,6 +36,9 @@ class RedFlagController extends Controller
     }
 
     public function disputeVer(Request $request){
+        if(session()->get('user')->tipoUsuario != Enuns::admin){
+            return redirect()->route('dashboard');
+        }
         $id = $request->id;
         $r = new RedFlag();
         $query = $r->getDispute($id);
@@ -41,6 +47,9 @@ class RedFlagController extends Controller
     }
 
     public function aprovarDispute(Request $request){
+        if(session()->get('user')->tipoUsuario != Enuns::admin){
+            return redirect()->route('dashboard');
+        }
         $idDispute = $request->iddispute;
         $idRedFlag = $request->idredflag;
         $r = new RedFlag();
@@ -54,6 +63,9 @@ class RedFlagController extends Controller
     }
 
     public function negarDispute(Request $request){
+        if(session()->get('user')->tipoUsuario != Enuns::admin){
+            return redirect()->route('dashboard');
+        }
         $idDispute = $request->iddispute;
         $idRedFlag = $request->idredflag;
         $r = new RedFlag();
@@ -121,6 +133,9 @@ class RedFlagController extends Controller
         return view('redflags.visualizar', $dados);
     }
     public function aprovar(Request $request){
+        if(session()->get('user')->tipoUsuario != Enuns::admin){
+            return redirect()->route('dashboard');
+        }
         $r = new RedFlag();
         $idUser = session()->get('user')->id;
         $query = $r->aprovarRedFlag($request->id);
@@ -134,8 +149,11 @@ class RedFlagController extends Controller
     }
 
     public function negar(Request $request){
+        if(session()->get('user')->tipoUsuario != Enuns::admin){
+            return redirect()->route('dashboard');
+        }
         $r = new RedFlag();
-        $idUser = session()->get('user')->iduser;
+        $idUser = session()->get('user')->id;
         $query = $r->negarRedFlag($request->id, $idUser);
         if($query){
             $msg = "Red flag Negada";

@@ -60,4 +60,11 @@ Route::middleware(['auth'])->group(function () {
         Route::post('{idRedflag}/senddispute',     ['as'=>'redflag.sendDispute',      'uses'=> 'RedFlagController@formDispute_send']);
     });
 
+
+//    tutorial routes
+
+    Route::group(['prefix'=>'tutorial', 'where'=>['id'=>'[0-9]+']], function() {
+        Route::get('list',     ['as'=>'tutorial.list',      'uses'=> 'TutorialController@index'] );
+    });
+
 });

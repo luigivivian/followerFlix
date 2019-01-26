@@ -63,7 +63,7 @@
         <ul id="slide-out" class="sidenav sidenav-fixed">
             <div> <img style="width: 80%; height: 80%;" src="{{asset('imgs/logo.png')}}"> </div>
             <li><a href="{{route('dashboard')}}">HOME</a></li>
-            <li><a href="#!">TUTORIALS</a></li>
+            <li><a href="{{route('tutorial.list')}}">TUTORIALS</a></li>
             <li><a href="{{route('getprofissional')}}">GET MORE PROFESSIONALS</a></li>
             <li><a href="#!">CLIENTE / TAREFA</a></li>
             <li><a href="#!">YOUR DOWNLINE</a></li>
