@@ -7,8 +7,9 @@ use Illuminate\Support\Facades\DB;
 
 class Tutorial extends Model
 {
+    protected $table = 'tutorial';
     protected $fillable = [
-        'titulo', 'src', 'descricao'
+        'titulo', 'src', 'descricao', 'id'
     ];
 
     public function getTutorials($id = null){
@@ -19,4 +20,5 @@ class Tutorial extends Model
         }
         return $query;
     }
+
 }

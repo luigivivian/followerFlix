@@ -65,6 +65,14 @@ Route::middleware(['auth'])->group(function () {
 
     Route::group(['prefix'=>'tutorial', 'where'=>['id'=>'[0-9]+']], function() {
         Route::get('list',     ['as'=>'tutorial.list',      'uses'=> 'TutorialController@index'] );
+        Route::get('edit/{id}',     ['as'=>'tutorial.edit',      'uses'=> 'TutorialController@formTutorial'] );
+        Route::get('new',     ['as'=>'tutorial.new',      'uses'=> 'TutorialController@formTutorial'] );
+
+        Route::post('newPost',     ['as'=>'tutorial.newPost',      'uses'=> 'TutorialController@newPost'] );
+        Route::post('editPost/{id}',     ['as'=>'tutorial.editPost',      'uses'=> 'TutorialController@editPost'] );
+
+        Route::get('delete/{id}',     ['as'=>'tutorial.delete',      'uses'=> 'TutorialController@delete'] );
     });
+
 
 });

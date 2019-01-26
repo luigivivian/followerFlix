@@ -56,9 +56,6 @@
             <?php
                 }
             ?>
-
-
-
         </div>
 
         <div class="col s12 l12">
