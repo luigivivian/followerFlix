@@ -15,6 +15,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/stylera.css') }}">
 
     <link rel="stylesheet" type="text/css" href="{{ asset('css/contratoCSS/contratoStyle.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/home/home.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/usuarioCSS/usuario.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/redFlags/redflag.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/responsividade/responsividade.css') }}">

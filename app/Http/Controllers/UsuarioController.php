@@ -73,15 +73,18 @@ class UsuarioController extends Controller
                     $dados['senha'] = bcrypt($dados['senha']);
                     $insert = $this->generateKeyAndCreateUser($dados);
                     if($insert === true){ //cadastro efetuado com sucesso !
-                        $email = $dados['email'];
-                        $s = new ServicoController();
-                        if($s->gerarContratosObrigatorios($email)){
-                            $data['msg'] = "Cadastro Realizado com sucesso !";
-                            return view('autenticacao.login', $data);
-                        }else{
-                            $dados['error'] = 'Erro no cadastro';
-                            return view('usuarios.registrar', $dados);
-                        }
+                        $data['msg'] = "Cadastro Realizado com sucesso !";
+                        return view('autenticacao.login', $data);
+                        //geracao dos contratos passa para quando o usuario é ativo
+//                        $email = $dados['email'];
+//                        $s = new ServicoController();
+//                        if($s->gerarContratosObrigatorios($email)){
+//                            $data['msg'] = "Cadastro Realizado com sucesso !";
+//                            return view('autenticacao.login', $data);
+//                        }else{
+//                            $dados['error'] = 'Erro no cadastro';
+//                            return view('usuarios.registrar', $dados);
+//                        }
                     }else{
                         return $insert;
                     }

@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use App\Enums\Enuns;
 
 class Servico extends Model
 {
@@ -39,6 +40,27 @@ class Servico extends Model
                 ->get();
         }
         return $users->toArray();
+    }
+
+    public function contratar($id){
+        $query = DB::table('servicos')->where('id', $id)->update(array('status' => Enuns::servico_status_aprovado));
+        if($query == 1){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public function getContratosAtivos($idUser){
+        $query = DB::select('SELECT * FROM servicos where status = :status AND id_contratante = :id_contratante',
+                            ['status' =>Enuns::servico_status_aprovado, 'id_contratante'=> $idUser]);
+        return $query;
+    }
+
+    public function countContratosAtivos($idUser){
+        $query = DB::select('SELECT count(*) as total FROM servicos where status = :status AND id_contratante = :id_contratante',
+            ['status' =>Enuns::servico_status_aprovado, 'id_contratante'=> $idUser]);
+        return $query;
     }
 //select * from usuarios u
 //INNER JOIN servicos s

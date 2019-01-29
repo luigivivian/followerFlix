@@ -202,14 +202,7 @@ body{
     bottom: 0;
     width: 100%;
 }
-.avatarPerfil{
-    margin-top:10%;
-    background-color: #ddd;
-    border-radius: 100%;
-    height: 150px;
-    object-fit: cover;
-    width: 150px;
-}
+
 .textareaPerfil{
     height: 100px;
 }

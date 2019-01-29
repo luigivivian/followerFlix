@@ -46,6 +46,10 @@
                                <label for="dataExpiracao">Data fim ativação</label>
                            </div>
 
+                           <div class="input-field col s12">
+                               <input placeholder="Data Nascimento" value="{{$user->dataNascimento }}" name="dataNascimento" id="dataNascimento" type="text" class="validate" required>
+                               <label for="dataExpiracao">Data de Nascimento</label>
+                           </div>
 
                        </div>
                        <div class="col s4 l4">
@@ -56,7 +60,6 @@
                            <div class="input-field col s12">
                                <select required name="metodoPagamento">
                                    <option value="" disabled selected>Payment</option>
-                                   <option value="pagseguro" <?= $user->metodoPagamento == "pagseguro" ? "selected" : ''; ?>>PagSeguro</option>
                                    <option value="paypal" <?= $user->metodoPagamento == "paypal" ? "selected" : ''; ?>>PayPal</option>
                                </select>
                                <label>Payment method</label>
@@ -69,23 +72,8 @@
             <div class="card cardDados">
                 <div class="card-content darkgrey-text center-align">
                     <div class="row">
-                        <div class="col l1">
 
-                        </div>
-                        <div class="input-field col s12 l2">
-                            <select name="idade" required>
-                                <option value="" disabled selected>Idade</option>
-                                <option value="15" <?= $user->idade >= 15 && $user->idade <= 20 ? "selected" : ''; ?>>15-20</option>
-                                <option value="21"<?= $user->idade >= 21 && $user->idade <= 25 ? "selected" : ''; ?>>21-25</option>
-                                <option value="26"<?= $user->idade >= 26 && $user->idade <= 30 ? "selected" : ''; ?>>26-30</option>
-                                <option value="31"<?= $user->idade >= 31 && $user->idade <= 35 ? "selected" : ''; ?>>31-35</option>
-                                <option value="40"<?= $user->idade >= 36 && $user->idade <= 40 ? "selected" : ''; ?>>36-40</option>
-                                <option value="41"<?= $user->idade >= 41 && $user->idade <= 45 ? "selected" : ''; ?>>41-45</option>
-                                <option value="46"<?= $user->idade >= 46 && $user->idade <= 50 ? "selected" : ''; ?>>46-50</option>
-                            </select>
-                            <label>Idade</label>
-                        </div>
-                        <div class="input-field col s12 l2">
+                        <div class="input-field col s12 l3">
                             <select required name="genero">
                                 <option value="" disabled selected>Genero</option>
                                 <option value="masculino" <?= $user->genero == "masculino" ? "selected" : ''; ?>>Masculino</option>
@@ -93,7 +81,7 @@
                             </select>
                             <label>Selecione seu genero</label>
                         </div>
-                        <div class="input-field col s12 l2">
+                        <div class="input-field col s12 l3">
                             <select name="interesse">
                                 <option value="" disabled selected>Interesses</option>
                                 <option value="musica"<?= $user->interesse == "musica" ? "selected" : ''; ?>>Musica</option>
@@ -105,7 +93,7 @@
                             </select>
                             <label>Interesse</label>
                         </div>
-                        <div class="input-field col s12 l2">
+                        <div class="input-field col s12 l3">
                             <select name="prestacao_servico" required>
                                 <option value="" disabled>Rede Social</option>
                                 <option value="facebook"<?= $user->prestacao_servico == "facebook" ? "selected" : ''; ?>>Facebook</option>
@@ -115,7 +103,7 @@
                             </select>
                             <label>Prestar engajamento</label>
                         </div>
-                        <div class="input-field col s12 l2">
+                        <div class="input-field col s12 l3">
                             <select name="contratacao_servico" required>
                                 <option value="" disabled>Rede Social</option>
                                 <option value="facebook"<?= $user->contratacao_servico == "facebook" ? "selected" : ''; ?>>Facebook</option>
@@ -125,9 +113,7 @@
                             </select>
                             <label>Receber engajamento</label>
                         </div>
-                        <div class="col l1">
 
-                        </div>
                     </div>
                 </div>
             </div>

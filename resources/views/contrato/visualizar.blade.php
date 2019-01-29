@@ -36,7 +36,7 @@
                            </div>
 
                            <div class="row col s12 l12 center-align">
-                                <button class="btn verde">Selecionar Profissional</button>
+                                <button onclick="contratar({{$c->idcontrato}});" class="btn verde">Selecionar Profissional</button>
                            </div>
                        </div>
                     </div>
@@ -49,6 +49,23 @@
 
     <script src="{{ asset('assets/materialize/js/materialize.js') }}"></script>
     <script>
+
+        function contratar(id){
+            console.log(id);
+            $.ajax({
+                url: '<?=route('contrato.contratar', $c->idcontrato)?>',
+                type: 'GET',
+                dataType: 'JSON',
+                success: function (data) {
+                    console.log(data);
+                    if(data.error == false){
+                        M.toast({html: data.msg, classes: 'verde'});
+                    }else{
+                        M.toast({html: data.msg, classes: 'vermelho'});
+                    }
+                }
+            });
+        }
         $(document).ready(function(){
             $('.modal').modal();
             $('select').formSelect();

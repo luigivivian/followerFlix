@@ -5,9 +5,11 @@
     <div id="conteudo">
         <div class="center-align">
             <h4 class="vermelho-txt">TUTORIAIS</h4>
-            <div class="container center-align">
-                <a class="btn btnBlock verde" href="{{route('tutorial.new')}}">NOVO TUTORIAL</a>
-            </div>
+            @if(session()->get('user')->tipoUsuario == \App\Enums\Enuns::admin)
+                <div class="container center-align">
+                    <a class="btn btnBlock verde" href="{{route('tutorial.new')}}">NOVO TUTORIAL</a>
+                </div>
+            @endif
             @if(isset($msg))
                 <div>
                     <h4>{{$msg}}</h4>

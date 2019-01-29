@@ -91,6 +91,48 @@
     <div class="cardBotoes center-align">
 
     </div>
+
+
+        <div class="row">
+            <div class="col s12 l12 mt-3">
+                    <div class="row">
+                        <div class="col s12 center-align">
+                            <div class="boxTotalContratos col s12 l4">
+                                <h5>CONTRATOS ATIVOS</h5>
+                                <h4>{{$totalContratosAtivos[0]->total}}</h4>
+                            </div>
+                            <div class="boxTotalContratos col s12 l4">
+                                <h5>RENDA PREVISTA</h5>
+                                <h4>{{$totalContratosAtivos[0]->total}}</h4>
+                            </div>
+                            <div class="boxTotalContratos col s12 l4">
+                                <h5>TOTAL RECEBIDO</h5>
+                                <h4>{{$totalContratosAtivos[0]->total}}</h4>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col s12 l12 center-align">
+                                <div class="col s12 l6">
+                                    <p>Milestone 1 - You have 3 active clients, and you page will be recommend up to your 5th level</p>
+                                </div>
+                                <div class="col s12 l6">
+                                    <p>Milestone 2 - You have 10 active clients, and you page will be recommend up to your 10th level</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col s12 l12 center-align mt-2">
+                                <iframe class="frameInicio" src="https://youtube.com/embed/o3WdLtpWM_c" frameborder="0" allow="" allowfullscreen></iframe>
+                            </div>
+                        </div>
+                    </div>
+
+            </div>
+        </div>
+
+
     {{--Modal convite--}}
     <div id="modalLink" class="modal">
         <div class="modal-content center-align">

@@ -45,6 +45,32 @@ class Usuario extends Authenticatable
             return false;
         }
     }
+    public function desativarVisibilidade($id){
+        $query = DB::table('usuarios')->where('id', $id)->update(array('visibilidade' => Enuns::visibilidade_off));
+        if($query == 1){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public function ativarVisibilidade($id){
+        $query = DB::table('usuarios')->where('id', $id)->update(array('visibilidade' => Enuns::visibilidade_on));
+        if($query == 1){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public function banirUsuario($id){
+        $query = DB::table('usuarios')->where('id', $id)->update(array('redflagBan' => Enuns::redflag_ban_banido));
+        if($query == 1){
+            return true;
+        }else{
+            return false;
+        }
+    }
 
     public function searchByEmailAndName($input){
         $user =  DB::table('usuarios')->where('status', '=', '1')->where('nome','LIKE','%'.$input.'%')->get();
@@ -57,12 +83,26 @@ class Usuario extends Authenticatable
     public function filter($data){
 //        self::where([['email','=',$email],['password','=', $password]])
         //ajustar query busca
-        $user =  DB::table('usuarios')
-            ->where('idade','>=', $data['idade'])->where('idade','<=', ($data['idade'] + 4))->where('status','=','1')->orWhere('id','>','1')
-            ->where('genero','LIKE','%'.$data['genero'].'%')
-            ->where('interesse','LIKE','%'.$data['interesse'].'%')
-            ->where('prestacao_servico','LIKE','%'.$data['prestacao_servico'].'%')->limit(15)->get();
-        return $user;
+//        $user =  DB::table('usuarios')
+//            ->where('idade','>=', $data['idade'])->where('idade','<=', ($data['idade'] + 4))->where('status','=','1')->orWhere('id','>','1')
+//            ->where('genero','LIKE','%'.$data['genero'].'%')
+//            ->where('interesse','LIKE','%'.$data['interesse'].'%')
+//            ->where('prestacao_servico','LIKE','%'.$data['prestacao_servico'].'%')->limit(15)->get();
+
+        $query = DB::select('SELECT * FROM usuarios
+                                WHERE idade >= :idade AND
+                                idade <= :idade2 AND status = 1 AND
+                                id > 1 AND genero LIKE :genero OR
+                                interesse LIKE :interesse OR
+                                prestacao_servico LIKE :servico limit 15',
+                            [
+                                'idade' => $data['idade'],
+                                'idade2'=> $data['idade'] + 4,
+                                'genero'=> $data['genero'],
+                                'interesse' => $data['interesse'],
+                                'servico' => $data['prestacao_servico']
+                            ]);
+        return $query;
     }
 
     public function getUser($id){

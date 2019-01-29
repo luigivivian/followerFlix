@@ -21,7 +21,9 @@ class DashboardController extends Controller
 //        }
 
         $s = new Servico();
-        $query = $s->getContratos(session()->get('user')->id);
+        $idUser = session()->get('user')->id;
+        $query = $s->getContratos($idUser);
+        $dados['totalContratosAtivos'] = $s->countContratosAtivos($idUser);
         $dados['contratos'] = $query;
         return view('privada', $dados);
     }

@@ -15,7 +15,7 @@ class AtivacaoController extends Controller
         $a = new Ativacao();
         $ativacao = $a->getAtivacao($u);
         if ($ativacao != null) { //caso o usuario possuir ativacao
-            if (date("Y-m-d") >= date('Y-m-d', strtotime($ativacao->dataValidade)) && $ativacao->dataValidade != null) {
+            if (date("Y-m-d") >= date('Y-m-d', strtotime($ativacao->dataValidade)) && $ativacao->dataValidade != null) { //valida data
                 //desativar conta usuario
                 $user = new UsuarioController();
                 $user->desativarUsuario($u);
@@ -52,11 +52,18 @@ class AtivacaoController extends Controller
         $pagamento = $a->verificarPagamento($u); //verifica pagamento no banco de dados só ativa se o pagamento é aprovado
         $ativacao = $a->getAtivacao($u);
         if($pagamento == true){
-            $a->confirmarAtivacao($ativacao);
+            $a->confirmarAtivacao($ativacao); //atualiza dados no banco table ativação
             $user = new Usuario();
-            $user->ativarUsuario($u);
-            $dados['error'] = "Pagamento aprovado, conta ativa";
-            return view('autenticacao.login', $dados);
+            $user->ativarUsuario($u); //ativa o usuario
+            $email = $u->email;
+            $s = new ServicoController();
+            if($s->gerarContratosObrigatorios($email)){  //gera contratos obrigatorios
+                $dados['msg'] = "Pagamento aprovado, conta ativa";
+                return view('autenticacao.login', $dados);
+            }else{
+                $dados['error'] = 'Erro no cadastro';
+                return view('usuarios.registrar', $dados);
+            }
         }else{
             $dados['error'] = "Pagamento não aprovado !";
             return view('autenticacao.login', $dados);

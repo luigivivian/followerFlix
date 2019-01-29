@@ -21,6 +21,14 @@ final class Enuns extends Enum
     const servico_pro = 'pro';
     const servico_super = 'super';
 
+
+    const servico_status_default = "pendente";
+    const servico_status_aprovado = "ativo";
+    const servico_status_finalizado = "cancelado";
+
+
+    const servico_preco_basico = 5;
+
 //    Usuario
     const usuario_inativo = 0;
     const usuario_ativo = 1;
@@ -39,4 +47,12 @@ final class Enuns extends Enum
     const dispute_status_aprovada = "Aprovada";
     const dispute_status_negada = "Negada";
 
+    // visibilidade rede
+    const visibilidade_on = "ativada";
+    const visibilidade_off = "desativada";
+
+    //redflag ban
+    //bloquear visibilidade na rede
+    const redflag_ban_default = "ativo";
+    const redflag_ban_banido = "banido";
 }
