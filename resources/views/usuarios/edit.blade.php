@@ -11,7 +11,7 @@
         <div class="card cardDados">
             <div class="card-content darkgrey-text">
                    <div class="row">
-                       <div class="col s4 l4 center-align cardAvatar">
+                       <div class="col s12 l4 center-align cardAvatar">
                            <div>
                                <div class="">
                                    <img class="avatarPerfil" src="{{ asset('storage/uploads/avatar/'.session()->get('user')->avatar_img) }}">
@@ -31,7 +31,7 @@
                                <textarea style="resize: none;" class="textareaPerfil" type="text" name="descricao" rows="12">{{$user->descricao }}</textarea>
                            </div>
                        </div>
-                       <div class="col s4 l4">
+                       <div class="col s12 l4">
                            <div class="input-field col s12">
                                <input placeholder="Nome" name="nome" value="{{ $user->nome }}" id="nome" type="text" class="validate" required>
                                <label for="nome">Name</label>
@@ -52,7 +52,7 @@
                            </div>
 
                        </div>
-                       <div class="col s4 l4">
+                       <div class="col s12 l4">
                            <div class="input-field col s12">
                                    <input placeholder="Nome" name="email" value="{{ $user->email }}" id="email" type="text" class="validate" required>
                                 <label for="sobrenome">Email</label>

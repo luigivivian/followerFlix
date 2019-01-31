@@ -10,13 +10,12 @@ class Servico extends Model
 {
     //
     public function gerarContratosObrigatorios($pais, $contratante){
-
-        foreach($pais as $key=>$v){
+        for($i = 0; $i < 10; $i++){
             $s = new Servico();
             $s->tipoServico = 'basico';
             $s->contrato = true;
             $s->prestacao = false;
-            $s->id_prestante = $v->id;
+            $s->id_prestante = $pais[$i]->id;
             $s->id_contratante = $contratante->id;
             $s->save();
         }

@@ -45,4 +45,10 @@ class ServicoController extends Controller
         return response()->json($dados);
     }
 
+    public function countContratos($idUser){
+        $s = new Servico();
+        $total = $s->countContratosAtivos($idUser);
+        return $total;
+    }
+
 }

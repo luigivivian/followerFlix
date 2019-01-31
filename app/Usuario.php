@@ -24,7 +24,7 @@ class Usuario extends Authenticatable
     ];
 
     public function getPais($e){
-        $data = DB::select('call getPais(?)',array($e));
+        $data = DB::select('call getContratos(?)',array($e));
         return $data;
     }
 

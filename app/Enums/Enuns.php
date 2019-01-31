@@ -8,9 +8,8 @@ final class Enuns extends Enum
 {
 //    ativacao
     const ativacao_inativo = 0;
-    const ativacao_pendente = 1;
-    const ativacao_ativo = 2;
-    const ativacao_invalida = 3;
+    const ativacao_ativo = 1;
+    const ativacao_invalida = 2;
 
     const ativacao_pagamento_naoPago = 'aguardando pagamento';
     const ativacao_pagamento_pago = 'pago';

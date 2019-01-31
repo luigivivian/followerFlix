@@ -156,6 +156,7 @@ class UsuarioController extends Controller
         $u = Usuario::find($id)->update($data);
         $dados['msg'] = "Dados Alterados !";
         $usuario = Usuario::where('id', $id)->first();
+        session(['user' => $usuario]);
         $dados['user'] = $usuario;
         //$response = json_encode(array('error'=>false, 'data'=>$dados));
 

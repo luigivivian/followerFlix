@@ -43,7 +43,7 @@ return [
         'mysql' => [
             'driver'    => 'mysql',
             'host'      => 'localhost',
-            'database'  => 'followflix',
+            'database'  => 'followerflix',
             'username'  => 'root',
             'password'  => 'admin',
             'charset'   => 'utf8',
