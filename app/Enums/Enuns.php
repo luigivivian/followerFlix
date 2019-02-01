@@ -7,13 +7,13 @@ use BenSampo\Enum\Enum;
 final class Enuns extends Enum
 {
 //    ativacao
-    const ativacao_inativo = 0;
-    const ativacao_ativo = 1;
-    const ativacao_invalida = 2;
+    const ativacao_inativo = "INATIVO";
+    const ativacao_ativo = "ATIVO";
+    const ativacao_invalida = "INVALIDO";
 
-    const ativacao_pagamento_naoPago = 'aguardando pagamento';
-    const ativacao_pagamento_pago = 'pago';
-    const ativacao_pagamento_fim = 'expirado';
+    const ativacao_pagamento_naoPago = 'AGUARDANDO PAGAMENTO';
+    const ativacao_pagamento_pago = 'PAGO';
+    const ativacao_pagamento_fim = 'EXPIRADO';
 
 //    servicos
     const servico_basico = 'basico';

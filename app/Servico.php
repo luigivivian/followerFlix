@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Http\Controllers\RedeController;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use App\Enums\Enuns;
@@ -10,12 +11,26 @@ class Servico extends Model
 {
     //
     public function gerarContratosObrigatorios($pais, $contratante){
-        for($i = 0; $i < 10; $i++){
+
+        for($i = 0; $i < count($pais); $i++){//gerando 10 contratos
             $s = new Servico();
             $s->tipoServico = 'basico';
             $s->contrato = true;
             $s->prestacao = false;
             $s->id_prestante = $pais[$i]->id;
+            $s->id_contratante = $contratante->id;
+            $s->save();
+        }
+        return true;
+    }
+
+    public function gerarCotratosRestantes($pais, $contratante){
+        for($i = 0; $i < count($pais); $i++){//gerando 10 contratos
+            $s = new Servico();
+            $s->tipoServico = 'basico';
+            $s->contrato = true;
+            $s->prestacao = false;
+            $s->id_prestante = $pais[$i];
             $s->id_contratante = $contratante->id;
             $s->save();
         }

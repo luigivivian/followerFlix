@@ -11,11 +11,35 @@ class ServicoController extends Controller
 {
     //
     public function gerarContratosObrigatorios($email){
+
         $u = new Usuario();
         $pais = $u->getPais($email);
+        $totalContratos = count($pais);
         $servico = new Servico();
         $contratante = Usuario::where('email', $email)->first();
         $query = $servico->gerarContratosObrigatorios($pais, $contratante);
+        $u = new Usuario();
+        //função pega 10 pais acima
+        /*
+         * a busca exclui os lideres, então,
+         *  caso retorne valor menor que 10 significa que o algoritmo chegou no nivel dos lideres
+         * então deverá buscar a quantidade restante para completar 10 contratos
+         * buscar lideres de forma aleatoria
+         */
+        if(count($pais) < 10){
+            $total = 10 - count($pais);
+            $r = new RedeController();
+            $lideres = $r->getShuffledLideres();
+            $contratos = array();
+            while($total != 0){
+                array_push($contratos, $lideres[$total]);
+                $total--;
+            }
+            $query2 = $servico->gerarCotratosRestantes($contratos, $contratante);
+            if(!$query2){
+                return false;
+            }
+        }
         if($query){
             return true;
         }else{

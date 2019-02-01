@@ -17,8 +17,8 @@ class AtivacaoTable extends Migration
         Schema::create('ativacao', function (Blueprint $table) {
             $table->increments('id');
             $table->date('dataCompra')->nullable();
-            $table->string('status')->default(Enuns::ativacao_inativo);
-            $table->string('pago')->default(Enuns::ativacao_pagamento_naoPago);
+            $table->enum('status', [Enuns::ativacao_inativo, Enuns::ativacao_ativo, Enuns::ativacao_invalida])->default(Enuns::ativacao_inativo);
+            $table->enum('pago', [Enuns::ativacao_pagamento_fim, Enuns::ativacao_pagamento_naoPago, Enuns::ativacao_pagamento_pago])->default(Enuns::ativacao_pagamento_naoPago);
             $table->date('dataValidade')->nullable();
             $table->string('currency_code')->nullable();
             $table->string('transacao_key')->nullable();
