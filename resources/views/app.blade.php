@@ -66,7 +66,7 @@
             <li><a href="{{route('dashboard')}}">HOME</a></li>
             <li><a href="{{route('tutorial.list')}}">TUTORIALS</a></li>
             <li><a href="{{route('getprofissional')}}">GET MORE PROFESSIONALS</a></li>
-            <li><a href="#!">CLIENTE / TAREFA</a></li>
+            <li><a href="{{route('tarefas.mytasks')}}">CLIENTE / TAREFA</a></li>
             <li><a href="#!">YOUR DOWNLINE</a></li>
             <li><a href="{{route('redflag.visualizar', session()->get('user')->id)}}">RED FLAG</a></li>
             <li><a href="{{route('myprofile')}}">YOUR ACCOUNT</a></li>

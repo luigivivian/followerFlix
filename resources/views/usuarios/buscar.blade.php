@@ -18,6 +18,19 @@
                 </div>
             </div>
         @endif
+        @if($totalContratosAtivos < 10)
+            <div>
+                <div class="col s12 m6 l12 cardBotoes card">
+                    <div class="card-content center-align">
+                        <div class="center-align">
+                            <h5 class="vermelho2-txt">VOCÊ NÃO POSSUI 10 CONTRATAÇÕES ATIVAS</h5>
+                            <h5 class="">Para acessar esse recurso você precisa ter 10 contratos ativos !</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endif
+
 
         @if(session()->get('usuarioAtivo') == true)
         <div id="acessoPadrao">

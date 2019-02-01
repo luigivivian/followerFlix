@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 use App\Ativacao;
+use App\Enums\Enuns;
+use App\Servico;
 use App\Usuario;
 use Illuminate\Http\Request;
 use Exception;
@@ -20,11 +22,13 @@ class UsuarioController extends Controller
         //usuario só tem acesso ao registro atravez do link de convite
         $dados['token'] = $token;
         $u = Usuario::where('token', $token)->first();
-        if(!isset($u->token)){
-            return "CONVITE INVALIDO 1";
+        if(!isset($u->token) || $u->tokenStatus == Enuns::token_inativo){
+            $data['msg'] = "CONVITE INVALIDO";
+            return view('autenticacao.login', $data);
         }else{
             if($u->status == 0){
-                return "CONVITE INVALIDO USUARIO COM STATUS INATIVO";
+                $data['msg'] =  "CONVITE INVALIDO USUARIO COM STATUS INATIVO";
+                return view('autenticacao.login', $data);
             }else{
                 $dados['token'] = $u;
                 $dados['id_usuario_pai'] = $u->id;
@@ -66,7 +70,8 @@ class UsuarioController extends Controller
         $u = Usuario::where('token', $dados['tokenConvite'])->first();
         unset($dados['tokenConvite']);
         if(!isset($u->token)){
-            return "Convite invalido";
+            $data['msg'] = "Convite invalido";
+            return view('autenticacao.login', $data);
         }else{
             if($u->status == 1){
                 if($loginValidar == null && $emailValidar == null){
@@ -164,7 +169,10 @@ class UsuarioController extends Controller
     }
 
     public function profissionalFilter(){
-        return view('usuarios.buscar');
+        $s = new Servico();
+        $idUser = session()->get('user')->id;
+        $dados['totalContratosAtivos'] = $s->countContratosAtivos($idUser);
+        return view('usuarios.buscar', $dados);
     }
     public function buscarUsuario(Request $request){
         $filtro = $request->all()['procurar'];
@@ -191,6 +199,7 @@ class UsuarioController extends Controller
 
     public function procurarUsuario(Request $request){
         $u = new Usuario();
+
         $data = $request->all();
         $parametro = $data['procurar'];
         $dados['users'] = $u->searchByEmailAndName($parametro);
@@ -198,6 +207,7 @@ class UsuarioController extends Controller
     }
 
     public function filtrar(Request $request){
+
         $u = new Usuario();
         $data = $request->all();
         $dados['users'] = $u->filter($data);

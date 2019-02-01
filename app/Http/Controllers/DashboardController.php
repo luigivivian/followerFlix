@@ -22,8 +22,16 @@ class DashboardController extends Controller
 
         $s = new Servico();
         $idUser = session()->get('user')->id;
+        if(session()->get('user')->lider == 1){
+            $u = new Usuario();
+            $lastLider = $u->getLastLider();
+            $dados['tokenLider'] = $lastLider->token;
+        }
+
         $query = $s->getContratos($idUser);
         $dados['totalContratosAtivos'] = $s->countContratosAtivos($idUser);
+        $dados['total_tarefas'] = $s->countMyTasks($idUser);
+        $dados['renda_prevista'] = $s->getTotalRendaPrevista($idUser);
         $dados['contratos'] = $query;
         return view('privada', $dados);
     }

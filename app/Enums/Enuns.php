@@ -16,15 +16,16 @@ final class Enuns extends Enum
     const ativacao_pagamento_fim = 'EXPIRADO';
 
 //    servicos
-    const servico_basico = 'basico';
-    const servico_pro = 'pro';
-    const servico_super = 'super';
+    const servico_basico = 'BASICO';
+    const servico_pro = 'PRO';
+    const servico_super = 'SUPER';
 
+    const servico_status_default = "PENDENTE";
+    const servico_status_aprovado = "ATIVO";
+    const servico_status_finalizado = "CANCELADO";
 
-    const servico_status_default = "pendente";
-    const servico_status_aprovado = "ativo";
-    const servico_status_finalizado = "cancelado";
-
+    const servico_lote_aprovado = "APROVADO";
+    const servico_lote_neutro = "AGUARDANDO LIBERACAO";
 
     const servico_preco_basico = 5;
 
@@ -37,21 +38,26 @@ final class Enuns extends Enum
 
 
     //redflags
-    const redflag_status_analise = "Em analise";
-    const redflag_status_aprovada = "Aprovada";
-    const redflag_status_negada = "Negada";
+    const redflag_status_analise = "EM ANALISE";
+    const redflag_status_aprovada = "APROVADA";
+    const redflag_status_negada = "NEGADA";
 
     //disputes
-    const dispute_status_analise = "Em analise";
-    const dispute_status_aprovada = "Aprovada";
-    const dispute_status_negada = "Negada";
+    const dispute_status_analise = "EM ANALISE";
+    const dispute_status_aprovada = "APROVADA";
+    const dispute_status_negada = "NEGADA";
 
     // visibilidade rede
-    const visibilidade_on = "ativada";
-    const visibilidade_off = "desativada";
+    const visibilidade_on = "ATIVADA";
+    const visibilidade_off = "DESATIVADA";
 
     //redflag ban
     //bloquear visibilidade na rede
-    const redflag_ban_default = "ativo";
-    const redflag_ban_banido = "banido";
+    const redflag_ban_default = "ATIVO";
+    const redflag_ban_banido = "BANIDO";
+
+
+    //token status
+    const token_ativo = "ATIVO";
+    const token_inativo = "INATIVO";
 }

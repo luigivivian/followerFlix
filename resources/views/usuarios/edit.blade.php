@@ -59,8 +59,8 @@
                            </div>
                            <div class="input-field col s12">
                                <select required name="metodoPagamento">
-                                   <option value="" disabled selected>Payment</option>
-                                   <option value="paypal" <?= $user->metodoPagamento == "paypal" ? "selected" : ''; ?>>PayPal</option>
+                                   <option value="" disabled>Payment</option>
+                                   <option value="paypal" selected>PayPal</option>
                                </select>
                                <label>Payment method</label>
                            </div>

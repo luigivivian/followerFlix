@@ -56,11 +56,16 @@ class ServicoController extends Controller
 
     public function contratar(Request $request){
         $idContrato = $request->id;
+        $idContratante = session()->get('user')->id;
         $dados['id'] = $idContrato;
         $s = new Servico();
         $query = $s->contratar($idContrato);
         if($query){
             $dados['msg'] = "Contrato efetuado !";
+            $totalContratos = $s->countContratosAtivos($idContratante);
+            if($totalContratos >= 10){
+                $s->aprovarLoteServico($idContratante);
+            }
             $dados['error'] = false;
         }else{
             $dados['msg'] = "Erro ao efetuar contratação !";
@@ -75,4 +80,10 @@ class ServicoController extends Controller
         return $total;
     }
 
+    public function mytasks(Request $request){
+        $s = new Servico();
+        $idUser = session()->get('user')->id;
+        $dados['myTasks'] =  $s->getMyTasks($idUser);
+        return view('contrato.myTasks', $dados);
+    }
 }

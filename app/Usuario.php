@@ -72,6 +72,24 @@ class Usuario extends Authenticatable
         }
     }
 
+    public function ativarToken($id){
+        $query = DB::table('usuarios')->where('id', $id)->update(array('tokenStatus' => Enuns::token_ativo));
+        if($query == 1){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public function desativarToken($id){
+        $query = DB::table('usuarios')->where('id', $id)->update(array('tokenStatus' => Enuns::token_inativo));
+        if($query == 1){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     public function searchByEmailAndName($input){
         $user =  DB::table('usuarios')->where('status', '=', '1')->where('nome','LIKE','%'.$input.'%')->get();
         if(count($user) < 1){
@@ -107,6 +125,11 @@ class Usuario extends Authenticatable
 
     public function getUser($id){
         $user =  DB::table('usuarios')->where('id', '=', $id)->first();
+        return $user;
+    }
+
+    public function getLastLider(){
+        $user = DB::table('usuarios')->where('id', '=', 10)->first();
         return $user;
     }
 

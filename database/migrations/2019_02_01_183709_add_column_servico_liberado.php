@@ -5,8 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 use App\Enums\Enuns;
 
-
-class AddColumnTokenFlag extends Migration
+class AddColumnServicoLiberado extends Migration
 {
     /**
      * Run the migrations.
@@ -15,8 +14,8 @@ class AddColumnTokenFlag extends Migration
      */
     public function up()
     {
-        Schema::table('usuarios', function($table) {
-            $table->enum('tokenStatus', [Enuns::token_ativo, Enuns::token_inativo])->default(Enuns::token_inativo);
+        Schema::table('servicos', function($table) {
+            $table->enum('status_remessa', [Enuns::servico_lote_aprovado, Enuns::servico_lote_neutro])->default(Enuns::servico_lote_neutro);
         });
     }
 

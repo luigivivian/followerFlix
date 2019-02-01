@@ -42,14 +42,14 @@ class Servico extends Model
             $users = DB::table('usuarios AS u')
                 ->join('servicos AS s', 'u.id', '=', 's.id_contratante')
                 ->join('usuarios AS up', 'up.id', '=', 's.id_prestante')
-                ->select('s.id as idcontrato','up.nome as nome_prestante', 'up.email as email_prestante', 's.status', 's.tipoServico', 'up.metodoPagamento')
+                ->select('s.id as idcontrato','up.nome as nome_prestante', 'up.email as email_prestante', 's.status', 's.tipoServico', 'up.metodoPagamento', 'up.avatar_img')
                 ->where('u.id', $idUser)
                 ->get();
         }else{
             $users = DB::table('usuarios AS u')
                 ->join('servicos AS s', 'u.id', '=', 's.id_contratante')
                 ->join('usuarios AS up', 'up.id', '=', 's.id_prestante')
-                ->select('s.id as idcontrato','up.nome as nome_prestante', 'up.email as email_prestante', 's.status', 's.tipoServico','up.metodoPagamento')
+                ->select('s.id as idcontrato','up.nome as nome_prestante', 'up.email as email_prestante', 's.status', 's.tipoServico','up.metodoPagamento', 'up.avatar_img')
                 ->where('s.id', $idContrato)
                 ->get();
         }
@@ -74,7 +74,30 @@ class Servico extends Model
     public function countContratosAtivos($idUser){
         $query = DB::select('SELECT count(*) as total FROM servicos where status = :status AND id_contratante = :id_contratante',
             ['status' =>Enuns::servico_status_aprovado, 'id_contratante'=> $idUser]);
+        return $query[0]->total;
+    }
+
+    public function getMyTasks($idUser){
+        $query = DB::select('SELECT * FROM servicos s INNER JOIN usuarios u ON u.id = s.id_contratante WHERE s.status = :status AND s.status_remessa = :status_remessa AND s.id_prestante = :id_prestante',
+            ['status'=>Enuns::servico_status_aprovado, 'status_remessa'=>Enuns::servico_lote_aprovado, 'id_prestante'=>$idUser]);
         return $query;
+    }
+
+    public function countMyTasks($idUser){
+        $query = DB::select('SELECT count(*) as total FROM servicos where status = :status AND id_prestante = :idPrestante AND status_remessa = :status_remessa',
+            ['status' =>Enuns::servico_status_aprovado, 'idPrestante'=> $idUser, 'status_remessa'=>Enuns::servico_lote_aprovado]);
+        return $query[0]->total;
+    }
+
+    public function getTotalRendaPrevista($idUser){
+        $query = DB::select('SELECT count(*) as total FROM servicos where id_prestante = :idPrestante',
+            ['idPrestante'=> $idUser]);
+        return $query[0]->total * 5;
+    }
+
+    public function aprovarLoteServico($idContratante){
+        $query = DB::table('servicos')->where('id_contratante', $idContratante)->update(array('status_remessa' => Enuns::servico_lote_aprovado));
+       return $query;
     }
 //select * from usuarios u
 //INNER JOIN servicos s
