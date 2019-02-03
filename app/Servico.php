@@ -14,7 +14,7 @@ class Servico extends Model
 
         for($i = 0; $i < count($pais); $i++){//gerando 10 contratos
             $s = new Servico();
-            $s->tipoServico = 'basico';
+            $s->tipoServico = Enuns::servico_basico;
             $s->contrato = true;
             $s->prestacao = false;
             $s->id_prestante = $pais[$i]->id;
@@ -38,12 +38,12 @@ class Servico extends Model
     }
 
     public function getContratos($idUser = null, $idContrato = null){
-        if($idContrato == null){
+        if($idContrato == null && $idUser != null){
             $users = DB::table('usuarios AS u')
                 ->join('servicos AS s', 'u.id', '=', 's.id_contratante')
                 ->join('usuarios AS up', 'up.id', '=', 's.id_prestante')
                 ->select('s.id as idcontrato','up.nome as nome_prestante', 'up.email as email_prestante', 's.status', 's.tipoServico', 'up.metodoPagamento', 'up.avatar_img')
-                ->where('u.id', $idUser)
+                ->where('u.id', $idUser)->where('s.status', Enuns::servico_status_default)->Orwhere('s.status', Enuns::servico_status_aprovado)
                 ->get();
         }else{
             $users = DB::table('usuarios AS u')
@@ -54,6 +54,12 @@ class Servico extends Model
                 ->get();
         }
         return $users->toArray();
+    }
+
+    public function getContratosByContratante($idContratante){
+        $query = DB::select('SELECT * FROM servicos where status = :status OR status = :status2 AND id_contratante = :id_contratante',
+            ['status' =>Enuns::servico_status_aprovado, 'status2' =>Enuns::servico_status_default, 'id_contratante'=> $idContratante]);
+        return $query;
     }
 
     public function contratar($id){
@@ -89,6 +95,12 @@ class Servico extends Model
         return $query[0]->total;
     }
 
+    public function countContratosAtivosAndPendentes($idUser){
+        $query = DB::select('SELECT count(*) as total FROM servicos where  id_contratante = :id_contratante and (status = :status OR status = :status2)',
+            ['status' =>Enuns::servico_status_aprovado,'status2'=>Enuns::servico_status_default, 'id_contratante'=> $idUser]);
+        return $query[0]->total;
+    }
+
     public function getTotalRendaPrevista($idUser){
         $query = DB::select('SELECT count(*) as total FROM servicos where id_prestante = :idPrestante',
             ['idPrestante'=> $idUser]);
@@ -96,9 +108,21 @@ class Servico extends Model
     }
 
     public function aprovarLoteServico($idContratante){
-        $query = DB::table('servicos')->where('id_contratante', $idContratante)->update(array('status_remessa' => Enuns::servico_lote_aprovado));
+        $data = date('Y-m-d');
+        $dataFim = date('Y-m-d', strtotime($data. ' + 30 days'));
+
+        $query = DB::table('servicos')->where('id_contratante', $idContratante)->update(array('status_remessa' => Enuns::servico_lote_aprovado, 'dataFimContrato'=> $dataFim));
        return $query;
     }
+
+    public function finalizarLoteContratos($idContratante){
+        $query = DB::table('servicos')->where('id_contratante', $idContratante)->where('dataFimContrato', '<=' ,date('Y-m-d'))->where('status','=', Enuns::servico_status_aprovado)
+            ->Orwhere('status', Enuns::servico_status_default)
+            ->update(array('status_remessa' => Enuns::servico_lote_invalido, 'status'=> Enuns::servico_status_finalizado));
+        return $query;
+
+    }
+
 //select * from usuarios u
 //INNER JOIN servicos s
 //ON u.id = s.id_contratante

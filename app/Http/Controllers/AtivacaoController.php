@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Ativacao;
 use App\Enums\Enuns;
+use App\Servico;
 use App\Usuario;
 use Illuminate\Http\Request;
 
@@ -57,13 +58,21 @@ class AtivacaoController extends Controller
             $user->ativarUsuario($u); //ativa o usuario
             $email = $u->email;
             $s = new ServicoController();
-            if($s->gerarContratosObrigatorios($email)){  //gera contratos obrigatorios
-                $dados['msg'] = "Pagamento aprovado, conta ativa";
-                return view('autenticacao.login', $dados);
+            //se total de contratos gerados
+            $sModel = new Servico();
+            if($sModel->countContratosAtivosAndPendentes($u->id) < 10){
+                if($s->gerarContratosObrigatorios($email)){  //gera contratos obrigatorios
+                    $dados['msg'] = "Pagamento aprovado, conta ativa";
+                    return view('autenticacao.login', $dados);
+                }else{
+                    $dados['error'] = 'Erro no cadastro';
+                    return view('autenticacao.login', $dados);
+                }
             }else{
-                $dados['error'] = 'Erro no cadastro';
-                return view('usuarios.registrar', $dados);
+                $dados['msg'] = "Ativacao Renovada";
+                return view('autenticacao.login', $dados);
             }
+
         }else{
             $dados['error'] = "Pagamento não aprovado !";
             return view('autenticacao.login', $dados);

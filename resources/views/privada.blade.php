@@ -17,6 +17,11 @@
                     </div>
                 </div>
             @endif
+                @if(isset($msg))
+                    <div>
+                        <h4>{{$msg}}</h4>
+                    </div>
+                @endif
 
             @if(session()->get('usuarioAtivo') == true || session()->get('user')->lider == 1)
                 @if(session()->get('user')->lider == 1)

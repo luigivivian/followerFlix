@@ -15,7 +15,7 @@ final class Enuns extends Enum
     const ativacao_pagamento_pago = 'PAGO';
     const ativacao_pagamento_fim = 'EXPIRADO';
 
-//    servicos
+//    servicos ##   planos  ####
     const servico_basico = 'BASICO';
     const servico_pro = 'PRO';
     const servico_super = 'SUPER';
@@ -23,9 +23,10 @@ final class Enuns extends Enum
     const servico_status_default = "PENDENTE";
     const servico_status_aprovado = "ATIVO";
     const servico_status_finalizado = "CANCELADO";
-
+//   #########  Lote     #############
     const servico_lote_aprovado = "APROVADO";
     const servico_lote_neutro = "AGUARDANDO LIBERACAO";
+    const servico_lote_invalido = "CONTRATO ENCERRADO";
 
     const servico_preco_basico = 5;
 

@@ -38,6 +38,8 @@ class AutenticacaoController extends Controller
             if($usuario->avatar_img == null){ //if image is null get default avatar img
                 $usuario->avatar_img = "avatarDefault.png";
             }
+            //verificar validade de contratos
+
             session(['user' => $usuario]);
             //Verificar ativacao e contratos
             $a = new AtivacaoController();
@@ -46,13 +48,19 @@ class AutenticacaoController extends Controller
                 $s = new ServicoController();
                 $totalContratos = $s->countContratos($usuario->id); //contando contratos
                 $u = new Usuario();
+
+                //verica contratos ativos
+                $contratosAtivos = $s->verificarValidadeContratos($usuario->id);
+                if($contratosAtivos == false){
+                    $s->gerarContratosObrigatorios($usuario->email);
+                    $msg = 'Contratos Expirados, renove seus contratos !';
+                }
                 //controle do token de convite
                 if($totalContratos < 10 AND $usuario->tokenStatus == Enuns::token_ativo){
                     $u->desativarToken($u->id);
                 }else if($totalContratos > 10 AND $usuario->tokenStatus == Enuns::token_inativo){
                     $u->ativarToken($u->id);
                 }
-
                 $aModel = new Ativacao();
                 session(['ativacao' => $aModel->getAtivacao($usuario)]);
                 session(['usuarioAtivo' => true]);
@@ -60,7 +68,7 @@ class AutenticacaoController extends Controller
                 session(['ativacao' => $status]);
                 session(['usuarioAtivo' => false]);
             }
-            return redirect(route('dashboard'));
+            return redirect(route('dashboard'))->with('msg', $msg);
         } else {
             $dados['error'] = "Usuario ou senha incorretos";
             return view('autenticacao.login', $dados);

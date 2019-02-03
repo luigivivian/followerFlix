@@ -6,6 +6,7 @@ use App\Servico;
 use App\Usuario;
 use Illuminate\Http\Request;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Mockery\Exception;
 
 class ServicoController extends Controller
 {
@@ -18,6 +19,11 @@ class ServicoController extends Controller
         $servico = new Servico();
         $contratante = Usuario::where('email', $email)->first();
         $query = $servico->gerarContratosObrigatorios($pais, $contratante);
+        if($query){
+            return true;
+        }else{
+            return false;
+        }
         $u = new Usuario();
         //função pega 10 pais acima
         /*
@@ -40,11 +46,7 @@ class ServicoController extends Controller
                 return false;
             }
         }
-        if($query){
-            return true;
-        }else{
-            return false;
-        }
+
     }
 
     public function visualizar(Request $request){
@@ -61,11 +63,11 @@ class ServicoController extends Controller
         $s = new Servico();
         $query = $s->contratar($idContrato);
         if($query){
-            $dados['msg'] = "Contrato efetuado !";
             $totalContratos = $s->countContratosAtivos($idContratante);
             if($totalContratos >= 10){
                 $s->aprovarLoteServico($idContratante);
             }
+            $dados['msg'] = "Contrato efetuado !";
             $dados['error'] = false;
         }else{
             $dados['msg'] = "Erro ao efetuar contratação !";
@@ -85,5 +87,23 @@ class ServicoController extends Controller
         $idUser = session()->get('user')->id;
         $dados['myTasks'] =  $s->getMyTasks($idUser);
         return view('contrato.myTasks', $dados);
+    }
+
+    public function verificarValidadeContratos($idContratante){
+        $s = new Servico();
+        $contratos = $s->getContratosByContratante($idContratante);
+
+        if (count($contratos) > 0) { //caso o usuario possuir contratos
+            if (date("Y-m-d") >= date('Y-m-d', strtotime($contratos[0]->dataFimContrato)) && $contratos[0]->dataFimContrato != null) { //valida data
+                //desativar conta usuario
+                try{
+                    $query = $s->finalizarLoteContratos($idContratante);
+                }catch (Exception $e) {
+                    return false;
+                }
+            }else if($contratos[0]->dataFimContrato == null || date("Y-m-d") < date('Y-m-d', strtotime($contratos[0]->dataFimContrato))){
+                return true;
+            }
+        }
     }
 }
