@@ -33,70 +33,71 @@
                             <h4>Seus contratos</h4>
                             <p>Os 10 primeiros contratos são obrigatórios</p>
                         </div>
+                        <div class="row col s12 m12 l12"> <!--1st row containing 2 cards-->
+                            <?php $count = 1;?>
+                            @foreach($contratos as $u)
+                                <?php
+                                switch (strtoupper($u->status)) {
+                                    case 'PENDENTE':
+                                        $corStatus = 'status-pendente';
+                                        break;
+                                    case 'ATIVO':
+                                        $corStatus = 'status-ativo';
+                                        break;
+                                    case 'INATIVO':
+                                        $corStatus = 'status-inativo';
+                                        break;
+                                }
+                                ?>
+                                @if($count <= 4)
+                                    <div class="col s12 m6 l3 card" onclick="visualizarContrato('<?= $u->idcontrato?>')">
+                                        <div class="card-content center-align">
+                                            <div>
+                                                @if($u->avatar_img != null)
+                                                    <img class="avatar" src="{{asset('storage/uploads/avatar/'.$u->avatar_img)}}">
+                                                @else
+                                                    <img class="avatar" src="{{asset('storage/uploads/avatar/avatarDefault.png')}}">
+                                                @endif
+                                            </div>
+                                            <div class="center-align">
+                                                <h5 class="">{{$u->nome_prestante}}</h5>
+                                                <p>{{$u->email_prestante}}</p>
+                                                <p class="status <?=$corStatus;?>">{{strtoupper($u->status)}}</p>
+                                                <br>
+                                                <p class="status verde">Clique para visualizar</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <?php $count++;?>
+                                @else
+                                    <div class="col s12 m6 l3 card cardOPT cardInvisivel"
+                                         onclick="visualizarContrato('<?= $u->idcontrato?>')">
+                                        <div class="card-content center-align">
+                                            <div>
+                                                @if($u->avatar_img != null)
+                                                    <img class="avatar" src="{{asset('storage/uploads/avatar/'.$u->avatar_img)}}">
+                                                @else
+                                                    <img class="avatar" src="{{asset('storage/uploads/avatar/avatarDefault.png')}}">
+                                                @endif
+                                            </div>
+                                            <div class="center-align">
+                                                <h5 class="">{{$u->nome_prestante}}</h5>
+                                                <p>{{$u->email_prestante}}</p>
+                                                <p class="status <?=$corStatus;?>">{{strtoupper($u->status)}}</p>
+                                                <br>
+                                                <p class="status verde">Clique para visualizar</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endif
+                            @endforeach
+                            <div id="mostrarCards" class="right-align">
+                                <a onclick="showContratos(1);" style="cursor: pointer;">Show All</a>
+                            </div>
+                        </div>
                 @endif
 
-                <div class="row col s12 m12 l12"> <!--1st row containing 2 cards-->
-                    <?php $count = 1;?>
-                    @foreach($contratos as $u)
-                        <?php
-                        switch (strtoupper($u->status)) {
-                            case 'PENDENTE':
-                                $corStatus = 'status-pendente';
-                                break;
-                            case 'ATIVO':
-                                $corStatus = 'status-ativo';
-                                break;
-                            case 'INATIVO':
-                                $corStatus = 'status-inativo';
-                                break;
-                        }
-                        ?>
-                        @if($count <= 4)
-                            <div class="col s12 m6 l3 card" onclick="visualizarContrato('<?= $u->idcontrato?>')">
-                                <div class="card-content center-align">
-                                    <div>
-                                        @if($u->avatar_img != null)
-                                            <img class="avatar" src="{{asset('storage/uploads/avatar/'.$u->avatar_img)}}">
-                                        @else
-                                            <img class="avatar" src="{{asset('storage/uploads/avatar/avatarDefault.png')}}">
-                                        @endif
-                                    </div>
-                                    <div class="center-align">
-                                        <h5 class="">{{$u->nome_prestante}}</h5>
-                                        <p>{{$u->email_prestante}}</p>
-                                        <p class="status <?=$corStatus;?>">{{strtoupper($u->status)}}</p>
-                                        <br>
-                                        <p class="status verde">Clique para visualizar</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <?php $count++;?>
-                        @else
-                            <div class="col s12 m6 l3 card cardOPT cardInvisivel"
-                                 onclick="visualizarContrato('<?= $u->idcontrato?>')">
-                                <div class="card-content center-align">
-                                    <div>
-                                        @if($u->avatar_img != null)
-                                            <img class="avatar" src="{{asset('storage/uploads/avatar/'.$u->avatar_img)}}">
-                                        @else
-                                            <img class="avatar" src="{{asset('storage/uploads/avatar/avatarDefault.png')}}">
-                                        @endif
-                                    </div>
-                                    <div class="center-align">
-                                        <h5 class="">{{$u->nome_prestante}}</h5>
-                                        <p>{{$u->email_prestante}}</p>
-                                        <p class="status <?=$corStatus;?>">{{strtoupper($u->status)}}</p>
-                                        <br>
-                                        <p class="status verde">Clique para visualizar</p>
-                                    </div>
-                                </div>
-                            </div>
-                        @endif
-                    @endforeach
-                    <div id="mostrarCards" class="right-align">
-                        <a onclick="showContratos(1);" style="cursor: pointer;">Show All</a>
-                    </div>
-                </div>
+
         </div>
         @if(session()->get('user')->lider == 1)
             <div class="row center-align">

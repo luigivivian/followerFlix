@@ -23,6 +23,7 @@ final class Enuns extends Enum
     const servico_status_default = "PENDENTE";
     const servico_status_aprovado = "ATIVO";
     const servico_status_finalizado = "CANCELADO";
+
 //   #########  Lote     #############
     const servico_lote_aprovado = "APROVADO";
     const servico_lote_neutro = "AGUARDANDO LIBERACAO";

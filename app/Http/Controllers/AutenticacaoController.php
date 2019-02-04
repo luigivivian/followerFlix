@@ -44,6 +44,7 @@ class AutenticacaoController extends Controller
             //Verificar ativacao e contratos
             $a = new AtivacaoController();
             $status = $a->verificarAtivacao($usuario);
+            $msg = null;
             if($status == true){
                 $s = new ServicoController();
                 $totalContratos = $s->countContratos($usuario->id); //contando contratos
@@ -52,8 +53,12 @@ class AutenticacaoController extends Controller
                 //verica contratos ativos
                 $contratosAtivos = $s->verificarValidadeContratos($usuario->id);
                 if($contratosAtivos == false){
-                    $s->gerarContratosObrigatorios($usuario->email);
-                    $msg = 'Contratos Expirados, renove seus contratos !';
+                    $gerarContratos = $s->gerarContratosObrigatorios($usuario->email);
+                    if($gerarContratos){
+                        $msg = 'Contratos Expirados, renove seus contratos !';
+                    }else{
+                        $msg = 'Erro ao gerar contratos';
+                    }
                 }
                 //controle do token de convite
                 if($totalContratos < 10 AND $usuario->tokenStatus == Enuns::token_ativo){
@@ -68,6 +73,7 @@ class AutenticacaoController extends Controller
                 session(['ativacao' => $status]);
                 session(['usuarioAtivo' => false]);
             }
+
             return redirect(route('dashboard'))->with('msg', $msg);
         } else {
             $dados['error'] = "Usuario ou senha incorretos";

@@ -19,11 +19,7 @@ class ServicoController extends Controller
         $servico = new Servico();
         $contratante = Usuario::where('email', $email)->first();
         $query = $servico->gerarContratosObrigatorios($pais, $contratante);
-        if($query){
-            return true;
-        }else{
-            return false;
-        }
+
         $u = new Usuario();
         //função pega 10 pais acima
         /*
@@ -32,7 +28,7 @@ class ServicoController extends Controller
          * então deverá buscar a quantidade restante para completar 10 contratos
          * buscar lideres de forma aleatoria
          */
-        if(count($pais) < 10){
+        if($totalContratos < 10){
             $total = 10 - count($pais);
             $r = new RedeController();
             $lideres = $r->getShuffledLideres();
@@ -42,11 +38,12 @@ class ServicoController extends Controller
                 $total--;
             }
             $query2 = $servico->gerarCotratosRestantes($contratos, $contratante);
-            if(!$query2){
+            if($query && $query2){
+                return true;
+            }else{
                 return false;
             }
         }
-
     }
 
     public function visualizar(Request $request){
@@ -65,7 +62,9 @@ class ServicoController extends Controller
         if($query){
             $totalContratos = $s->countContratosAtivos($idContratante);
             if($totalContratos >= 10){
+                $u = new Usuario();
                 $s->aprovarLoteServico($idContratante);
+                $u->ativarToken($idContratante);
             }
             $dados['msg'] = "Contrato efetuado !";
             $dados['error'] = false;

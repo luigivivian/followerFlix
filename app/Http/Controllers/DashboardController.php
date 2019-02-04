@@ -28,7 +28,7 @@ class DashboardController extends Controller
             $dados['tokenLider'] = $lastLider->token;
         }
 
-        $query = $s->getContratos($idUser);
+        $query = $s->getContratos($idUser, null);
         $dados['totalContratosAtivos'] = $s->countContratosAtivos($idUser);
         $dados['total_tarefas'] = $s->countMyTasks($idUser);
         $dados['renda_prevista'] = $s->getTotalRendaPrevista($idUser);

@@ -27,7 +27,7 @@ class Servico extends Model
     public function gerarCotratosRestantes($pais, $contratante){
         for($i = 0; $i < count($pais); $i++){//gerando 10 contratos
             $s = new Servico();
-            $s->tipoServico = 'basico';
+            $s->tipoServico = Enuns::servico_basico;
             $s->contrato = true;
             $s->prestacao = false;
             $s->id_prestante = $pais[$i];
@@ -39,21 +39,21 @@ class Servico extends Model
 
     public function getContratos($idUser = null, $idContrato = null){
         if($idContrato == null && $idUser != null){
-            $users = DB::table('usuarios AS u')
-                ->join('servicos AS s', 'u.id', '=', 's.id_contratante')
-                ->join('usuarios AS up', 'up.id', '=', 's.id_prestante')
-                ->select('s.id as idcontrato','up.nome as nome_prestante', 'up.email as email_prestante', 's.status', 's.tipoServico', 'up.metodoPagamento', 'up.avatar_img')
-                ->where('u.id', $idUser)->where('s.status', Enuns::servico_status_default)->Orwhere('s.status', Enuns::servico_status_aprovado)
-                ->get();
+            $query = DB::select('SELECT s.id as idcontrato,up.nome as nome_prestante, up.email as email_prestante,s.status, s.tipoServico, up.metodoPagamento, up.avatar_img
+                                FROM usuarios u INNER JOIN servicos s
+                                ON u.id = s.id_contratante
+                                INNER JOIN usuarios up ON up.id = s.id_prestante
+                                WHERE u.id = :idUser AND (s.status = :status OR s.status = :status2)',['idUser'=>$idUser, 'status'=>Enuns::servico_status_aprovado, 'status2'=>Enuns::servico_status_default]);
+            return $query;
         }else{
-            $users = DB::table('usuarios AS u')
-                ->join('servicos AS s', 'u.id', '=', 's.id_contratante')
-                ->join('usuarios AS up', 'up.id', '=', 's.id_prestante')
-                ->select('s.id as idcontrato','up.nome as nome_prestante', 'up.email as email_prestante', 's.status', 's.tipoServico','up.metodoPagamento', 'up.avatar_img')
-                ->where('s.id', $idContrato)
-                ->get();
+            $query = DB::select('SELECT s.id as idcontrato,up.nome as nome_prestante, up.email as email_prestante,s.status, s.tipoServico, up.metodoPagamento, up.avatar_img
+                                FROM usuarios u INNER JOIN servicos s
+                                ON u.id = s.id_contratante
+                                INNER JOIN usuarios up ON up.id = s.id_prestante
+                                WHERE s.id = :idContrato AND (s.status = :status OR s.status = :status2)',['idContrato'=>$idContrato, 'status'=>Enuns::servico_status_aprovado, 'status2'=>Enuns::servico_status_default]);
+            return $query;
         }
-        return $users->toArray();
+
     }
 
     public function getContratosByContratante($idContratante){
@@ -110,9 +110,9 @@ class Servico extends Model
     public function aprovarLoteServico($idContratante){
         $data = date('Y-m-d');
         $dataFim = date('Y-m-d', strtotime($data. ' + 30 days'));
-
         $query = DB::table('servicos')->where('id_contratante', $idContratante)->update(array('status_remessa' => Enuns::servico_lote_aprovado, 'dataFimContrato'=> $dataFim));
-       return $query;
+
+        return $query;
     }
 
     public function finalizarLoteContratos($idContratante){
